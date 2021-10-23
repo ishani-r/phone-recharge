@@ -1,7 +1,7 @@
 <?php
 namespace App\Contracts;
 
-Interface UserContract
+Interface UserDetailContract
 {
     public function store(array $array);
     public function show($id);

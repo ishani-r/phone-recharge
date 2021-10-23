@@ -47,7 +47,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $this->User->store();
     }
 
     /**
@@ -113,13 +113,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $data = User::find($id);
-        $destination = 'storage/admin/'.$data->image;
-        if(file::exists($destination))
-        {
-            file::delete($destination);
-        }
-        $data->delete();
+        $data = $this->User->destroy($id);
         return $data;
     }
 

@@ -10,17 +10,23 @@
             <p>Dashboard</p>
         </a>
     </li>
-    <li class="nav-item {{ request()->is('*profile*') ? 'active' : '' }}
+    <!-- <li class="nav-item {{ request()->is('*profile*') ? 'active' : '' }}
 ">
         <a class="nav-link" href="{{route('admin.showprofile')}}">
             <i class="material-icons">person</i>
             <p>Admin Profile</p>
         </a>
-    </li>
+    </li> -->
     <li class="nav-item ">
         <a class="nav-link" href="{{ route('admin.dashboard.index') }}">
             <i class="material-icons">content_paste</i>
             <p>User Table List</p>
+        </a>
+    </li>
+    <li class="nav-item ">
+        <a class="nav-link" href="{{ route('admin.details.index') }}">
+            <i class="material-icons">content_paste</i>
+            <p>User Persnal Details</p>
         </a>
     </li>
     <li class="nav-item ">
@@ -42,7 +48,7 @@
         </a>
     </li>
     <li class="nav-item ">
-        <a class="nav-link" href="./notifications.html">
+        <a class="nav-link" href="{{ route('admin.notification') }}">
             <i class="material-icons">notifications</i>
             <p>Notifications</p>
         </a>

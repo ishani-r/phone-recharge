@@ -9,12 +9,12 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-primary">
-            <h4 class="card-title">Users Table</h4>
+            <h4 class="card-title">Users Detail Table</h4>
             <p class="card-category"> Here is a subtitle for this table</p>
           </div>
           <div class="card-body">
-            <div class="table-responsive-sg">
-              {!! $dataTable->table()!!}
+            <div class="table-responsive">
+              {!! $dataTable->table(['class' => 'table table-bordered dt-responsive nowrap']) !!}
             </div>
           </div>
         </div>
@@ -29,7 +29,7 @@
     var id = $(this).data('id');
     var number = $(this).attr('id','asd');
     $.ajax({
-      url: "{{route('admin.changestatus')}}",
+      url: "{{route('admin.statuschange')}}",
       type: 'get',
       data: {
         id: id,
@@ -47,15 +47,16 @@
       }
     })
   });
-  $(document).on('click','.delete', function(){
-    var delet = $(this).data('id');
-    var url = '{{route('admin.dashboard.destroy', ':queryId')}}';
-    url = url.replace(':queryId', delet);
+  $(document).on('click','.delete',function(){
+    var id = $(this).data('id');
+    var url = '{{route('admin.details.destroy', ':queryId')}}';
+    url = url.replace(':queryId', id);
+    var number = $(this).attr('id','asd');
     $.ajax({
       url: url,
       type: "DELETE",
       data: {
-        id: delet,
+        id: id,
         _token: '{{ csrf_token() }}'
       },
       dataType: "json",

@@ -164,6 +164,7 @@ return [
         // Illuminate\Html\HtmlServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class,
 
 
         /*

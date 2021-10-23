@@ -53,6 +53,56 @@ MR :: 20/10/2021
 Today I am Working on below point
  - User modul perform using api
  - solve previous error
+
+Ishani Ranpariya
+Work Report 20/10/2021
+- Manage user status Active/deactive witout pagerefresh done
+- Perform Admin login using api
+- perform crud on User module using api
+- create project in GitHub
+- run migrate for user details table
+- solve some error
+
+Ishani Ranpariya
+MR :: 21/10/2021
+
+Today I am working on below points 
+  - working on user persnal details modual
+  - solve previous error
+
+Ishani Ranpariya
+Work Report 21/10/2021
+- User Details Modual Perform using API
+- set validation on change password
+- admin change password complete
+- country, state, city display on userdetail table with set foreign key
+- solve some error
+
+Ishani Ranpariya 
+MR :: 22/10/2021
+Today I am working on below points 
+- working on Notification modual
+
+Ishani Ranpariya 
+Work Report 22/10/2021
+- add column on userdetail table 
+- display userdetail table
+- User Details table Perform using API
+- set foreign key between userdetail and user table
+- create like table 
+- working on like table
+- solve some error
+
+Ishani Ranpariya 
+MR :: 23/10/2021
+Today I am working on below points 
+- working on Like and Notification modual
+
+Ishani Ranpariya
+Work Report 20/10/2021
+- Like and Notification modual complete
+- set validation on admin update profile 
+- solve some error
 <!-- ------------------------------------------------------------------------ -->
 @extends('layouts.master')
 @section('content')
@@ -61,7 +111,6 @@ Today I am Working on below point
 {!! Form::open() !!}
 
 @csrf
-
 
 <div class="form-group">
 {{ Form::label('name','Name')}}
@@ -116,3 +165,24 @@ step 3 : composer require yajra/laravel-datatables:^1.5
 
 step 4 : php artisan vendor:publish --tag=datatables
 step 4 : php artisan datatables:make DataTable_Name
+
+
+API
+step 1 : composer require laravel/passport
+step 2 : 
+config/app.php
+'providers' =>[
+Laravel\Passport\PassportServiceProvider::class,
+],
+step 3 :
+php artisan migrate
+php artisan passport:install
+step 4 :
+'api' => [ 
+    'driver' => 'passport', 
+    'provider' => 'users', 
+], 
+
+country
+status
+city

@@ -55,7 +55,7 @@
       </a>
       <ul class="dropdown-menu">
         <li class="button-container">
-          <a href="{{ route('admin.changepass') }}" class="btn btn-primary btn-block">Change Password</a>
+          <a href="{{ route('admin.changepassword') }}" class="btn btn-primary btn-block">Change Password</a>
           <a  onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-primary btn-block">Sign Out</a>
           <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
             @csrf
