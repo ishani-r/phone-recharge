@@ -33,6 +33,8 @@ class CreateUserDetailsTable extends Migration
             $table->string('food');
             $table->string('marray_age');
             $table->string('dressing');
+            $table->string('latitude');
+            $table->string('longitude');
             $table->string('status');
             $table->string('slug');
             $table->timestamps();

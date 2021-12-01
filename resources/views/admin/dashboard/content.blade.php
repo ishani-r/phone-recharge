@@ -9,7 +9,7 @@
                   <div class="ct-chart" id="dailySalesChart"></div>
                 </div>
                 <div class="card-body">
-                  <h4 class="card-title">Daily Sales</h4>
+                  <h4 class="card-title">{{ trans('Daily Sales')}}</h4>
                   <p class="card-category">
                     <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                 </div>
@@ -26,7 +26,7 @@
                   <div class="ct-chart" id="websiteViewsChart"></div>
                 </div>
                 <div class="card-body">
-                  <h4 class="card-title">Email Subscriptions</h4>
+                  <h4 class="card-title">{{ trans('Email Subscriptions')}}</h4>
                   <p class="card-category">Last Campaign Performance</p>
                 </div>
                 <div class="card-footer">
@@ -42,7 +42,7 @@
                   <div class="ct-chart" id="completedTasksChart"></div>
                 </div>
                 <div class="card-body">
-                  <h4 class="card-title">Completed Tasks</h4>
+                  <h4 class="card-title">{{ trans('Completed Tasks')}}</h4>
                   <p class="card-category">Last Campaign Performance</p>
                 </div>
                 <div class="card-footer">
@@ -60,7 +60,7 @@
                   <div class="card-icon">
                     <i class="material-icons">content_copy</i>
                   </div>
-                  <p class="card-category">Used Space</p>
+                  <p class="card-category">{{ trans('Used Space')}}</p>
                   <h3 class="card-title">49/50
                     <small>GB</small>
                   </h3>
@@ -79,7 +79,7 @@
                   <div class="card-icon">
                     <i class="material-icons">store</i>
                   </div>
-                  <p class="card-category">Revenue</p>
+                  <p class="card-category">{{ trans('Revenue')}}</p>
                   <h3 class="card-title">$34,245</h3>
                 </div>
                 <div class="card-footer">
@@ -95,7 +95,7 @@
                   <div class="card-icon">
                     <i class="material-icons">info_outline</i>
                   </div>
-                  <p class="card-category">Fixed Issues</p>
+                  <p class="card-category">{{ trans('Fixed Issues')}}</p> 
                   <h3 class="card-title">75</h3>
                 </div>
                 <div class="card-footer">
@@ -111,7 +111,7 @@
                   <div class="card-icon">
                     <i class="fa fa-twitter"></i>
                   </div>
-                  <p class="card-category">Followers</p>
+                  <p class="card-category">{{ trans('Followers')}}</p>
                   <h3 class="card-title">+245</h3>
                 </div>
                 <div class="card-footer">
@@ -126,8 +126,8 @@
             <div class="col-lg-6 col-md-12">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title">Employees Stats</h4>
-                  <p class="card-category">New employees on 15th September, 2016</p>
+                  <h4 class="card-title">{{ trans('Employees Stats')}}</h4>
+                  <p class="card-category">{{ trans('New employees on 15th September, 2016')}}</p>
                 </div>
                 <div class="card-body table-responsive">
                   <table class="table table-hover">
@@ -172,23 +172,23 @@
                 <div class="card-header card-header-tabs card-header-warning">
                   <div class="nav-tabs-navigation">
                     <div class="nav-tabs-wrapper">
-                      <span class="nav-tabs-title">Tasks:</span>
+                      <span class="nav-tabs-title">{{ trans('Tasks:')}}</span>
                       <ul class="nav nav-tabs" data-tabs="tabs">
                         <li class="nav-item">
                           <a class="nav-link active" href="#profile" data-toggle="tab">
-                            <i class="material-icons">bug_report</i> Bugs
+                            <i class="material-icons">bug_report</i> {{ trans('Bugs')}}
                             <div class="ripple-container"></div>
                           </a>
                         </li>
                         <li class="nav-item">
                           <a class="nav-link" href="#messages" data-toggle="tab">
-                            <i class="material-icons">code</i> Website
+                            <i class="material-icons">code</i> {{ trans('Website')}}
                             <div class="ripple-container"></div>
                           </a>
                         </li>
                         <li class="nav-item">
                           <a class="nav-link" href="#settings" data-toggle="tab">
-                            <i class="material-icons">cloud</i> Server
+                            <i class="material-icons">cloud</i> {{ trans('Server')}}
                             <div class="ripple-container"></div>
                           </a>
                         </li>

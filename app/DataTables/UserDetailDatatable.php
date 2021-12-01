@@ -40,7 +40,7 @@ class UserDetailDatatable extends DataTable
                 {
                     return '<button type="button" data-id="'.$data->id.'" class="badge rounded-pill bg-success status"> Active </button>';
                 }else{
-                    return '<button type="button" data-id="'.$data->id.'" class="badge rounded-pill bg-danger status"> Decative </button>';
+                    return '<button type="button" data-id="'.$data->id.'" class="badge rounded-pill bg-danger status"> Deactive </button>';
                 }
             })
 
@@ -94,6 +94,7 @@ class UserDetailDatatable extends DataTable
             Column::make('country'),
             Column::make('state'),
             Column::make('city'),
+            Column::make('address'),
             Column::make('education'),
             Column::make('work'),
             Column::make('employer'),
@@ -106,6 +107,8 @@ class UserDetailDatatable extends DataTable
             Column::make('food'),
             Column::make('marray_age'),
             Column::make('dressing'),
+            // Column::make('latitude'),
+            // Column::make('longitude'),
             Column::make('status'),
             Column::computed('action')
                   ->exportable(false)

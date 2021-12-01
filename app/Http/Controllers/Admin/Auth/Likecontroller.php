@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\DataTables\NotificationDatatable;
 use App\Models\Notification;
 
-class Likecontroller extends Controller
+class LikeController extends Controller
 {
     public function like()
     {

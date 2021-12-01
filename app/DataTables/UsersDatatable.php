@@ -26,7 +26,7 @@ class UsersDatatable extends DataTable
             ->addColumn('action', function($data){
                 $result = '<div class="btn-group">';
                 $result .= '<a href="'.route('admin.dashboard.show',$data->id).'"><button class="btn-sm btn-outline-warning" style="border-radius: 2.1875rem;"><i class="fa fa-eye" aria-hidden="true"></i></button></a>';
-                // $result .= '<a href="'.route('admin.dashboard.edit',$data->id).'"><button class="btn-sm btn-outline-info">Edit</button></a>';
+                $result .= '<a href="'.route('admin.dashboard.edit',$data->id).'"><button class="btn-sm btn-outline-info" style="border-radius: 2.1875rem;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>';
                 $result .= '<button type="submit" data-id="'.$data->id.'" class="btn-sm btn-outline-danger delete" style="border-radius: 2.1875rem;"><i class="fa fa-trash" aria-hidden="true"></i></button></form></div>';
                 return $result;
             })
@@ -40,12 +40,12 @@ class UsersDatatable extends DataTable
             })
 
             ->editColumn('status', function ($data) {
-            if($data['status'] == 'Active')
-            {
-                return '<button type="button" data-id="'.$data->id.'" class="badge rounded-pill bg-success status"> Active </button>';
-            }else{
-                return '<button type="button" data-id="'.$data->id.'" class="badge rounded-pill bg-danger status"> Decative </button>';
-            }
+                if($data['status'] == 'Active')
+                {
+                    return '<button type="button" data-id="'.$data->id.'" class="badge rounded-pill bg-success status"> Active </button>';
+                }else{
+                    return '<button type="button" data-id="'.$data->id.'" class="badge rounded-pill bg-danger status"> Deactive </button>';
+                }
             })
 
             ->rawColumns(['action','image','status'])
@@ -77,11 +77,10 @@ class UsersDatatable extends DataTable
                     ->dom('Blfrtip')
                     ->orderBy(1)
                     ->buttons(
-                        Button::make('create'),
-                        Button::make('export'),
+                        Button::make('excel'),
+                        Button::make('csv'),
+                        Button::make('pdf'),
                         Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
                     );
     }
 

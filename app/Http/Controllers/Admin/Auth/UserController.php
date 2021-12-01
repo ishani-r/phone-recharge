@@ -5,12 +5,16 @@ namespace App\Http\Controllers\Admin\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use App\DataTables\UsersDataTable;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\Admin\UserRequest;
+use Illuminate\Support\Facades\Hash;
 
 use App\Contracts\UserContract;
 use App\Repositories\UserRepository;
+use Maatwebsite\Excel\Row;
 
 class UserController extends Controller
 {
@@ -36,7 +40,19 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        // $user = User::find('1');
+        // // $user = Role::find('1');
+        // $user->assignRole([2]);
+        // $user = User::create([
+        //     'name' => 'dfd Savaddsdasani', 
+        //     'email' => 'adddemin@gsmail.com',
+        //     'password' => bcrypt('123456')
+        // ]);
+        // $role = Role::create(['name' => 'sahise','guard_name'=>'web']);
+        // $user->assignRole([$role->id]);
+        // dd($user);
+        $role = Role::all();
+        return view('admin.dashboard.adduser', compact('role'));
     }
 
     /**
@@ -47,7 +63,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $this->User->store();
+        $user = User::find('1');
+        // dd($user);
+        // $user->assignRole($request->input('test'));
+        $input = $request->all();
+        $input['password'] = Hash::make($input['password']);
+        $input['status'] = "Active";
+        $input['slug'] = $input['name'];
+
+        $a = $request->input('test');
+        $user = User::create($input);
+        $user->assignRole([$a]);
+        return redirect()->route('admin.dashboard.index');
     }
 
     /**
@@ -71,7 +98,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $data = User::find($id);
-        return view('admin.dashboard.edituser', compact('data'));
+        $role = Role::all();
+        return view('admin.dashboard.edituser', compact('data','role'));
     }
 
     /**
@@ -81,12 +109,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $user = User::find($id);
         $user->name = $request->name;
         $user->mobile = $request->mobile;
         $user->email = $request->email;
+        $user->gender = $request->gender;
         if($request->hasfile('image'))
         {
             $destination = 'storage/admin/'.$user->image;
@@ -96,11 +125,13 @@ class UserController extends Controller
             }
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
-            // dd($extension);
             $filename = time().'.'.$extension;
             $file->move('storage/admin/',$filename);
             $user->image = $filename;
         }
+        // $a = $request->input('test');
+        // dd($a);
+        // $user->assignRole([$a]);
         $user->save();
         return redirect()->route('admin.dashboard.index');
     }

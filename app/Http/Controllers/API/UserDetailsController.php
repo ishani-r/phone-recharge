@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\Admin\UserDetailRequest;
 
 use App\Contracts\UserDetailContract;
 use App\Repositories\UserDetailRepository;
@@ -15,9 +16,8 @@ class UserDetailsController extends Controller
         $this->User = $User;
     }
 
-    public function store(Request $request)
+    public function store(UserDetailRequest $request)
     {
-        // dd("api");
         $user = $this->User->store($request->all());
         return response()->json([
             'message' => 'Data sucessfully inserted',
@@ -35,14 +35,23 @@ class UserDetailsController extends Controller
     {
         $user = $this->User->update($request->all(),$id);
         return response()->json([
-            'message' => 'Data Updated Sucessfully',
+            'message' => 'Data Updated Successfully',
             'user' => $user
         ]);
     }
-
+    
     public function destroy($id)
     {
         $user = $this->User->destroy($id);
         return "Data Deleted Successfully";
+    }
+    
+    public function distance(Request $request)
+    {
+        $user = $this->User->distance($request->all());
+        return response()->json([
+            'message' => 'Distance Find Successfully',
+            'user' => $user
+        ]);
     }
 }

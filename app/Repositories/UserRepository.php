@@ -10,7 +10,7 @@ class UserRepository implements UserContract
 {
     public function store(array $array)
     {
-        // dd("Reposi-store");
+        // dd($array);
         $user = new User;
         $user->name = $array['name'];
         $user->mobile = $array['mobile'];
@@ -26,9 +26,10 @@ class UserRepository implements UserContract
             $user->image = $filename;
         }
         $user->password = Hash::make($array['password']);
-        $user->status = $array['status'];
-        $user->slug = $array['slug'];
+        $user->status = 'Active';
+        $user->slug = $array['name'];
         $user->save();
+        // $user->assignRole('User');
         return $user;
     }
 
@@ -40,7 +41,6 @@ class UserRepository implements UserContract
 
     public function update(array $array, $id)
     {
-        // dd("repo-update");
         $user = User::find($id);
         $user->name = $array['name'];
         $user->mobile = $array['mobile'];
@@ -58,6 +58,7 @@ class UserRepository implements UserContract
         $user->password = Hash::make($array['password']);
         $user->status = $array['status'];
         $user->slug = $array['slug'];
+        
         $user->save();
         return $user;
     }

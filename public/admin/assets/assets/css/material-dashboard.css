@@ -13,6 +13,7 @@
 
  */
 /*     brand Colors              */
+
 .card {
   font-size: .875rem;
 }
@@ -20776,7 +20777,9 @@ Copyright (c) 2015 Daniel Eden
 .dark-edition .form-group label {
   color: #a9afbbd1;
 }
-
+.error{
+  color:#000000;
+}
 .dark-edition [class^='bmd-label'],
 .dark-edition [class*=' bmd-label'] {
   color: #999999;

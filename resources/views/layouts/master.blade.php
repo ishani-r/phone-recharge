@@ -19,8 +19,12 @@
   <link href="{{asset('admin/assets/assets/css/material-dashboard.css?v=2.1.0')}}" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="{{asset('admin/assets/assets/demo/demo.css')}}" rel="stylesheet" />
+
+  @stack('css')
   <!-- -------------------------datatable------------------------ -->
-  
+
+
+
 </head>
 
 <body class="dark-edition">
@@ -31,22 +35,22 @@
 
         Tip 2: you can also add an image using data-image tag
     -->
-      
+
       @include('layouts.nevbar')
-      </div>
     </div>
-    <div class="main-panel">
-      <!-- Navbar -->
-      @include('layouts.header')
-      <!-- End Navbar -->
-      @yield('content')
-      @include('layouts.footer')
-      <script>
-        const x = new Date().getFullYear();
-        let date = document.getElementById('date');
-        date.innerHTML = '&copy; ' + x + date.innerHTML;
-      </script>
-    </div>
+  </div>
+  <div class="main-panel">
+    <!-- Navbar -->
+    @include('layouts.header')
+    <!-- End Navbar -->
+    @yield('content')
+    @include('layouts.footer')
+    <script>
+      const x = new Date().getFullYear();
+      let date = document.getElementById('date');
+      date.innerHTML = '&copy; ' + x + date.innerHTML;
+    </script>
+  </div>
   </div>
   <div class="fixed-plugin">
     <div class="dropdown show-dropdown">
@@ -55,8 +59,8 @@
       </a>
       <ul class="dropdown-menu">
         <li class="button-container">
-          <a href="{{ route('admin.changepassword') }}" class="btn btn-primary btn-block">Change Password</a>
-          <a  onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-primary btn-block">Sign Out</a>
+          <a href="{{ route('admin.changepassword') }}" class="btn btn-primary btn-block">{{ trans('Change Password')}}</a>
+          <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-primary btn-block">{{ trans('Sign Out')}}</a>
           <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
             @csrf
           </form>
@@ -144,8 +148,20 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
   <script src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.11.0/js/dataTables.bootstrap4.min.js"></script>
+  <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <!-- ------------------------------ Download Data in Datatable CDN ------------------------- -->
+  <!-- <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script> -->
+  <!-- ------------------------------------------------------------------------------ -->
   @stack('js')
+  
   <script>
+    
     $(document).ready(function() {
       $().ready(function() {
         $sidebar = $('.sidebar');
@@ -306,13 +322,18 @@
         });
       });
     });
-  </script>
-  <script>
+
     $(document).ready(function() {
-      // Javascript method's body can be found in assets/js/demos.js
-      md.initDashboardPageCharts();
+      $("#test").CreateMultiCheckBox({
+        width: '230px',
+        defaultText: 'Select Permission',
+        height: '250px'
+      });
     });
   </script>
+
+
+
 </body>
 
 </html>

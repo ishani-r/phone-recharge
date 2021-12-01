@@ -10,6 +10,7 @@ class UserDetail extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'id',
         'education',
         'work',
         'employer',
@@ -29,10 +30,11 @@ class UserDetail extends Model
         'status',
         'slug',
         'address',
+        'latitude',
+        'longitude',
     ];
     public function user()
     {
-        return $this->hasOne(User::class,'id','user_id')->select('id','name');
-    }
-   
+        return $this->hasOne(User::class,'id','user_id');
+    }  
 }

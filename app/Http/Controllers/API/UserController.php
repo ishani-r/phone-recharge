@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Http\Requests\Admin\UserRequest;
 
 use App\Contracts\UserContract;
 use App\Repositories\UserRepository;
@@ -16,13 +17,13 @@ class UserController extends Controller
         $this->User = $User;
     }
 
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         $user = $this->User->store($request->all());
         return response()->json([
             'message' => 'Data sucessfully inserted',
             'user' => $user
-            ]);
+        ]);
     }
 
     public function show($id=null)

@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->date('dob');
             $table->string('image');
             $table->string('password');
+            $table->string('otp')->nullable();
             $table->string('status');
             $table->string('slug');
             $table->rememberToken();

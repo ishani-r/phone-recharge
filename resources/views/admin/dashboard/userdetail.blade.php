@@ -9,8 +9,8 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-primary">
-            <h4 class="card-title">Users Detail Table</h4>
-            <p class="card-category"> Here is a subtitle for this table</p>
+            <h4 class="card-title">{{ trans('Users Detail Table')}}</h4>
+            <p class="card-category"> {{ trans('Here is a data for User Details')}}</p>
           </div>
           <div class="card-body">
             <div class="table-responsive">
@@ -44,24 +44,41 @@
           $("#asd").addClass("badge rounded-pill bg-danger status");
         }
         $("#asd").html(data.status);
+        $('#userdetaildatatable-table').DataTable().ajax.reload();
       }
     })
   });
   $(document).on('click','.delete',function(){
-    var id = $(this).data('id');
-    var url = '{{route('admin.details.destroy', ':queryId')}}';
-    url = url.replace(':queryId', id);
-    var number = $(this).attr('id','asd');
-    $.ajax({
-      url: url,
-      type: "DELETE",
-      data: {
-        id: id,
-        _token: '{{ csrf_token() }}'
-      },
-      dataType: "json",
-      success: function(data){
-        window.location.reload();
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this imaginary file!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        var id = $(this).data('id');
+        var url = '{{route("admin.details.destroy", ":queryId")}}';
+        url = url.replace(':queryId', id);
+        var number = $(this).attr('id','asd');
+        $.ajax({
+          url: url,
+          type: "DELETE",
+          data: {
+            id: id,
+            _token: '{{ csrf_token() }}'
+          },
+          dataType: "json",
+          success: function(data){
+            $('#userdetaildatatable-table').DataTable().ajax.reload();
+          }
+        });
+        swal("Poof! Your imaginary file has been deleted!", {
+        icon: "success",
+        });
+      } else {
+        swal("Your imaginary file is safe!");
       }
     });
   });

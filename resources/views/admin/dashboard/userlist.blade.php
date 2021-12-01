@@ -9,9 +9,27 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-primary">
-            <h4 class="card-title">Users Table</h4>
-            <p class="card-category"> Here is a subtitle for this table</p>
+            <h4 class="card-title">{{ trans('Users Table')}}</h4>
+            <p class="card-category"> {{ trans('Here is a data for Users')}}</p>
           </div>
+          <form action="{{ route('admin.import') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <label class="bmd-label-floating">{{ trans('Select File')}}</label>
+            <input type="file" name="file" class="form-control">
+            @error('file')
+            <span role="alert">
+              <strong style="color:red;">{{ $message }}</strong>
+            </span>
+            @enderror
+            <br>
+            <button class="btn btn-success">{{ trans('Import User Data')}}</button>
+            <a class="btn btn-warning" href="{{ route('admin.export') }}">{{ trans('Export User Data')}}</a>
+          </form>
+          <div>
+            <!-- <a href="{{ route('admin.dashboard.create') }}" class="btn btn-success">Add User</a> -->
+          </div>
+          <!-- --------------------------------------------------- -->
+          <!-- --------------------------------------------------- -->
           <div class="card-body">
             <div class="table-responsive-sg">
               {!! $dataTable->table()!!}
@@ -25,9 +43,10 @@
 @endsection
 @push('js')
 <script>
-  $(document).on('click','.status', function(){
+  // ---------------------------------------status-----------------------------
+  $(document).on('click', '.status', function() {
     var id = $(this).data('id');
-    var number = $(this).attr('id','asd');
+    var number = $(this).attr('id', 'asd');
     $.ajax({
       url: "{{route('admin.changestatus')}}",
       type: 'get',
@@ -35,34 +54,51 @@
         id: id,
       },
       dataType: "json",
-      success: function(data){
+      success: function(data) {
         $("#asd").removeAttr("class");
-        if(data.status == "Active")
-        {
+        if (data.status == "Active") {
           $("#asd").addClass("badge rounded-pill bg-success status");
-        }else{
+        } else {
           $("#asd").addClass("badge rounded-pill bg-danger status");
         }
         $("#asd").html(data.status);
+        $('#usersdatatable-table').DataTable().ajax.reload();
       }
     })
   });
-  $(document).on('click','.delete', function(){
-    var delet = $(this).data('id');
-    var url = '{{route('admin.dashboard.destroy', ':queryId')}}';
-    url = url.replace(':queryId', delet);
-    $.ajax({
-      url: url,
-      type: "DELETE",
-      data: {
-        id: delet,
-        _token: '{{ csrf_token() }}'
-      },
-      dataType: "json",
-      success: function(data){
-        window.location.reload();
-      }
-    });
+  // ---------------------------------------Delete-----------------------------
+  $(document).on('click', '.delete', function() {
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this imaginary file!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          var delet = $(this).data('id');
+          var url = '{{route("admin.dashboard.destroy", ":queryId")}}';
+          url = url.replace(':queryId', delet);
+          $.ajax({
+            url: url,
+            type: "DELETE",
+            data: {
+              id: delet,
+              _token: '{{ csrf_token() }}'
+            },
+            dataType: "json",
+            success: function(data) {
+              $('#usersdatatable-table').DataTable().ajax.reload();
+            }
+          });
+          swal("Poof! Your imaginary file has been deleted!", {
+            icon: "success",
+          });
+        } else {
+          swal("Your imaginary file is safe!");
+        }
+      });
   });
 </script>
 {!! $dataTable->scripts() !!}

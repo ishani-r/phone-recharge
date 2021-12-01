@@ -74,13 +74,11 @@ class NotificationDatatable extends DataTable
     {
         return [
             Column::make('id')->data('DT_RowIndex'),
-            Column::make('user_id'),
+            Column::make('sender_user_id'),
             Column::make('title'),
             Column::make('message'),
-            Column::make('sender_user_id'),
+            Column::make('reciever_id'),
             Column::make('status'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
