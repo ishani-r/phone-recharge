@@ -17,14 +17,14 @@
                </div>
                <div class="card-body">
                   <div class="table-responsive">
-                     {{$no=1}}
+                     <input type="hidden" value="{{$no=1}}">
                      <table class="table table-bordered">
                         <thead>
                            <tr>
-                              <th>No.</th>
-                              <th>Name</th>
-                              <th>Permission</th>
-                              <th>Action</th>
+                              <th>{{ trans('No.')}}</th>
+                              <th>{{ trans('Name')}}</th>
+                              <th>{{ trans('Permission')}}</th>
+                              <th>{{ trans('Action')}}</th>
                            </tr>
                         </thead>
                         <tbody>
@@ -73,7 +73,6 @@
 <script>
    // ---------------------------------------Delete-----------------------------
    $(document).on('click', '.delete', function() {
-      alert(1);
       swal({
             title: "Are you sure?",
             text: "Once deleted, you will not be able to recover this imaginary file!",
@@ -84,7 +83,6 @@
          .then((willDelete) => {
             if (willDelete) {
                var id = $(this).data('id');
-               alert(id);
                var url = '{{route("admin.role.destroy", ":queryId")}}';
                url = url.replace(':queryId', id);
                var number = $(this).attr('id', 'asd');

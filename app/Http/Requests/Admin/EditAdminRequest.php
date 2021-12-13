@@ -3,8 +3,10 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
+use App\Models\Admin;
 
-class AdminRequest extends FormRequest
+class EditAdminRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,23 +23,20 @@ class AdminRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
+        $value = $request->all();
         return [
             'name' => 'required',
-            'email' =>  'required|string|email|max:255|regex:/(.+)@(.+)\.(.+)/i|unique:admins',
-            'password' => 'required|min:8|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/',
-            'image' => 'required|mimes:jpeg,jpg,png,gif',
+            'email' =>  'required|string|email|max:255|regex:/(.+)@(.+)\.(.+)/i|unique:admins,email,' . $value['id'],
         ];
     }
+
     public function messages()
     {
         return [
             'name.required' => 'Please Enter Your Name.',
             'email.required' => 'Please Enter Your Email Address.',
-            'password.required' => 'Please Enter Your Password.',
-            'image.required' => 'Please Select Your Profile Picture.',
-            'password.regex' => 'Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.'
         ];
     }
 }

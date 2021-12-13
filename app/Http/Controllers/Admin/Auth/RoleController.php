@@ -32,7 +32,8 @@ class RoleController extends Controller
     public function create()
     {
         $per = Permission::all();
-        return view('admin.dashboard.addrole', compact('per'));
+        $permission = Permission::all();
+        return view('admin.dashboard.addrole', compact('per','permission'));
     }
 
     /**
@@ -49,8 +50,21 @@ class RoleController extends Controller
         // $data->save();
         // $a = $data->givePermissionTo($test);
         $data = Role::create(['name' => $request->name, 'guard_name' => "admin"]);
-        $data->syncPermissions($request->input('test'));
+        $data->syncPermissions($request->input('permission'));
         return redirect()->route('admin.role.index');
+    }
+
+    public function checkName(Request $request)
+    {
+        if ($request->get('name')) {
+            $name = $request->get('name');
+            $data = DB::table("roles")->where('name', $name)->count();
+            if ($data > 0) {
+                return 'Name_Exists';
+            } else {
+                return 'Unique';
+            }
+        }
     }
 
     /**
@@ -75,7 +89,6 @@ class RoleController extends Controller
     {
         $role = Role::find($id);
         $permission = Permission::all();
-        
         $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", $id)
             ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
             ->all();

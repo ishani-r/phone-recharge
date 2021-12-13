@@ -20,14 +20,19 @@ class UserDetailDatatable extends DataTable
      */
     public function dataTable($query)
     {
+        $user = Auth()->guard('admin')->user();
         return datatables()
             ->eloquent($query)
             // ->addColumn('action', 'userdetaildatatable.action')
-            ->addColumn('action', function($data){
+            ->addColumn('action', function($data) use ($user) {
                 $result = '<div class="btn-group">';
-                $result .= '<a href="'.route('admin.details.show',$data->id).'"><button class="btn-sm btn-outline-warning" style="border-radius: 2.1875rem;"><i class="fa fa-eye" aria-hidden="true"></i></button></a>';
+                if ($user->can('view-userdetail-data')) {
+                    $result .= '<a href="'.route('admin.details.show',$data->id).'"><button class="btn-sm btn-outline-warning" style="border-radius: 2.1875rem;"><i class="fa fa-eye" aria-hidden="true"></i></button></a>';
+                }
                 // $result .= '<a href="'.route('admin.dashboard.edit',$data->id).'"><button class="btn-sm btn-outline-info">Edit</button></a>';
-                $result .= '<button type="submit" data-id="'.$data->id.'" class="btn-sm btn-outline-danger delete" style="border-radius: 2.1875rem;"><i class="fa fa-trash" aria-hidden="true"></i></button></form></div>';
+                if ($user->can('delete-userdetail-data')) {
+                    $result .= '<button type="submit" data-id="'.$data->id.'" class="btn-sm btn-outline-danger delete" style="border-radius: 2.1875rem;"><i class="fa fa-trash" aria-hidden="true"></i></button></form></div>';
+                }
                 return $result;
             })
 

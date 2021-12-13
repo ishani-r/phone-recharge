@@ -1,11 +1,4 @@
 @extends('layouts.master')
-@push('css')
-<style>
-   .error {
-      color: red;
-   }
-</style>
-@endpush
 @section('content')
 <div class="content">
    <div class="container-fluid">

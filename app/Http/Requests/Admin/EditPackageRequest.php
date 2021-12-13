@@ -26,9 +26,8 @@ class EditPackageRequest extends FormRequest
     public function rules(Request $request)
     {
         $value=$request->all();
-        $data=Premium::where('name',$value['name'])->select('id')->first();
         return [
-            'name' => 'required|unique:premia,name,'.$data['id'],
+            'name' => 'required|unique:premia,name,'.$value['id'],
             'six_months' => 'required',
             'three_months' => 'required',
             'one_months' => 'required',

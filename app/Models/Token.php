@@ -5,14 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Permission extends Model
+class Token extends Model
 {
     use HasFactory;
 
-    protected $table = 'permissions';
     protected $fillable = [
-         'module_name',
-         'name',
-         'guard_name',
-     ];
+        'id',
+        'name',
+        'email',
+        'token'
+    ];
 }
+// 406 - not Acceptable
+// 409 - Conflict

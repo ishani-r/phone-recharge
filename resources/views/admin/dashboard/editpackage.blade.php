@@ -21,7 +21,8 @@
                   {!! Form::open(['route'=> array('admin.premium.update',$pre->id), 'id' => 'package_form']) !!}
                   @csrf
                   @method('put')
-                  <!-- -------------------------------------- Name ------------------------------------ -->
+                  <!-- ------------------------------------ Name --------------------------------- -->
+                  <input type="hidden" name="id" value="{{$pre->id}}">
                   <div class="row">
                      <div class="col-md-4">
                         <div class="form-group">
@@ -101,15 +102,18 @@
                   </div>
                   {{Form::submit('Update Package', ['class'=>'btn btn-primary pull-right'])}}
                   {!!Form::close()!!}
+                  <div class="col-md-8">
+                     <a href="{{ route('admin.premium.index')}}" class="btn btn-primary pull-left">Cancel</a>
+                  </div>
                   <div class="clearfix"></div>
                <!-- </form> -->
                </div>
             </div>
-            <div class="card">
+            <!-- <div class="card">
                <div class="card-header card-header-primary">
                      <a href="{{ route('admin.premium.index')}}"><h4 class="card-title"><i class="fa fa-hand-o-left" aria-hidden="true"></i> {{ trans('Back')}}</h4></a>
                </div>
-            </div>
+            </div> -->
          </div>
       </div>
    </div>

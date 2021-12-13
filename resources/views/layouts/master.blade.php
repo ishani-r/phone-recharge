@@ -329,6 +329,11 @@
         defaultText: 'Select Permission',
         height: '250px'
       });
+      $("#tests").CreateMultiCheckBox({
+        width: '230px',
+        defaultText: 'Select Role',
+        height: '250px'
+      });
     });
   </script>
 

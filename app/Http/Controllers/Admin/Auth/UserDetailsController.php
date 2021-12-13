@@ -15,6 +15,9 @@ class UserDetailsController extends Controller
     public function __construct(UserDetailContract $User)
     {
         $this->User = $User;
+        $this->middleware('permission:view-userdetail-data', ['only' => ['show']]);
+        $this->middleware('permission:delete-userdetail-data', ['only' => ['destroy']]);
+
     }
     /**
      * Display a listing of the resource.

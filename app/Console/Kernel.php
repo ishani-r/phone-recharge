@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\DemoCron::class,
     ];
 
     /**
@@ -24,6 +24,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('demo:cron')
+                 ->everyMinute();
         // $schedule->command('inspire')->hourly();
     }
 
@@ -37,5 +39,6 @@ class Kernel extends ConsoleKernel
         $this->load(__DIR__.'/Commands');
 
         require base_path('routes/console.php');
+        
     }
 }

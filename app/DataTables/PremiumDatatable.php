@@ -19,27 +19,33 @@ class PremiumDatatable extends DataTable
      */
     public function dataTable($query)
     {
+        $user = Auth()->guard('admin')->user();
         return datatables()
             ->eloquent($query)
             // ->addColumn('action', 'premiumdatatable.action');
-            ->addColumn('action', function($data){
+            ->addColumn('action', function ($data) use ($user) {
                 $result = '<div class="btn-group">';
-                $result .= '<a href="'.route('admin.premium.show',$data->id).'"><button class="btn-sm btn-outline-warning" style="border-radius: 2.1875rem;"><i class="fa fa-eye" aria-hidden="true"></i></button></a>';
-                $result .= '<a href="'.route('admin.premium.edit',$data->id).'"><button class="btn-sm btn-outline-info" style="border-radius: 2.1875rem;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>';
-                $result .= '<button type="submit" data-id="'.$data->id.'" class="btn-sm btn-outline-danger delete" style="border-radius: 2.1875rem;"><i class="fa fa-trash" aria-hidden="true"></i></button></form></div>';
+                if ($user->can('view-package')) {
+                    $result .= '<a href="' . route('admin.premium.show', $data->id) . '"><button class="btn-sm btn-outline-warning" style="border-radius: 2.1875rem;"><i class="fa fa-eye" aria-hidden="true"></i></button></a>';
+                }
+                if ($user->can('update-package')) {
+                    $result .= '<a href="' . route('admin.premium.edit', $data->id) . '"><button class="btn-sm btn-outline-info" style="border-radius: 2.1875rem;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>';
+                }
+                if ($user->can('delete-package')) {
+                    $result .= '<button type="submit" data-id="' . $data->id . '" class="btn-sm btn-outline-danger delete" style="border-radius: 2.1875rem;"><i class="fa fa-trash" aria-hidden="true"></i></button></form></div>';
+                }
                 return $result;
             })
 
             ->editColumn('status', function ($data) {
-                if($data['status'] == 'Active')
-                {
-                    return '<button type="button" data-id="'.$data->id.'" class="badge rounded-pill bg-success status"> Active </button>';
-                }else{
-                    return '<button type="button" data-id="'.$data->id.'" class="badge rounded-pill bg-danger status"> Deactive </button>';
+                if ($data['status'] == 'Active') {
+                    return '<button type="button" data-id="' . $data->id . '" class="badge rounded-pill bg-success status"> Active </button>';
+                } else {
+                    return '<button type="button" data-id="' . $data->id . '" class="badge rounded-pill bg-danger status"> Deactive </button>';
                 }
             })
 
-            ->rawColumns(['action','status'])
+            ->rawColumns(['action', 'status'])
             ->addIndexColumn();
     }
 
@@ -62,18 +68,17 @@ class PremiumDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('premiumdatatable-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->dom('Blfrtip')
-                    ->orderBy(1)
-                    ->buttons(
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                    );
-                    
+            ->setTableId('premiumdatatable-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->dom('Blfrtip')
+            ->orderBy(1)
+            ->buttons(
+                Button::make('excel'),
+                Button::make('csv'),
+                Button::make('pdf'),
+                Button::make('print'),
+            );
     }
 
     /**
@@ -93,10 +98,10 @@ class PremiumDatatable extends DataTable
             Column::make('save'),
             Column::make('status'),
             Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
         ];
     }
 

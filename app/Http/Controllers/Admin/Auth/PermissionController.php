@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\DataTables\PermissionDatatable;
 use App\Models\Permission;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class PermissionController extends Controller
 {
@@ -26,7 +28,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.dashboard.addpermission');
     }
 
     /**
@@ -37,7 +39,41 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $permissions = array();
+        $create_per = $request->module_name . '-create';
+        $update_per = $request->module_name . '-update';
+        $view_per = $request->module_name . '-list';
+        $delete_per = $request->module_name . '-delete';
+        
+        $permissions[] = $create_per;
+        $permissions[] = $update_per;
+        $permissions[] = $view_per;
+        $permissions[] = $delete_per;
+        foreach ($permissions as $permission) {
+            Permission::create(
+                [
+                    'module_name' => $request->module_name,
+                    'name' => $permission,
+                    'guard_name' => $request->guard_name,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                ]
+            );
+        }
+        return redirect()->route('admin.permission.index');
+    }
+
+    public function moduleName(Request $request)
+    {
+        if ($request->get('module_name')) {
+            $module_name = $request->get('module_name');
+            $data = DB::table("permissions")->where('module_name', $module_name)->count();
+            if ($data > 0) {
+                return 'Name_Exists';
+            } else {
+                return 'Unique';
+            }
+        }
     }
 
     /**

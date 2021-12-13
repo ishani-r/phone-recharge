@@ -17,7 +17,7 @@
                   {!! Form::open(['route'=> array('admin.role.update',$role->id), 'id' => 'role_form']) !!}
                   @csrf
                   @method('put')
-                  <!-- -------------------------------------- Name ------------------------------------ -->
+                  <!-- ----------------------------------- Name --------------------------------- -->
                   <div class="row">
                      <div class="col-md-4">
                         <div class="form-group">
@@ -72,13 +72,13 @@
                </div>
             </div>
 
-            <!-- <div class="card">
+            <div class="card">
                <div class="card-header card-header-primary">
                   <a href="{{ route('admin.role.index')}}">
                      <h4 class="card-title"><i class="fa fa-hand-o-left" aria-hidden="true"></i> {{ trans('Back')}}</h4>
                   </a>
                </div>
-            </div> -->
+            </div>
          </div>
       </div>
    </div>

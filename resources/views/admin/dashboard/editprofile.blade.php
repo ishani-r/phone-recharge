@@ -115,8 +115,8 @@
       errorElement: 'span',
       messages: {
         name: 'Please Enter Your Name',
-        email: 'Please Enter Your Email Addres',
-      },
+        email: 'Please Enter Your Email Addres'
+      } 
     });
   });
 </script>

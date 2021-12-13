@@ -16,6 +16,9 @@ class PremiumController extends Controller
     public function __construct(PremiumContract $Premium)
     {
         $this->Premium = $Premium;
+        $this->middleware('permission:view-package', ['only' => ['show']]);
+        $this->middleware('permission:update-package', ['only' => ['edit','update']]);
+        $this->middleware('permission:delete-package', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.

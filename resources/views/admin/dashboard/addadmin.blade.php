@@ -82,7 +82,7 @@
                </div>
                <div class="card-body">
                   <!-- <form> -->
-                  {!! Form::open(['route'=> array('admin.adminuser.store'), 'id' => 'admin_form']) !!}
+                  {!! Form::open(['route'=> array('admin.adminuser.store'), 'id' => 'admin_form', 'enctype' => 'multipart/form-data']) !!}
                   <!-- --------------------------------- Name ------------------------------- -->
                   <div class="row">
                      <div class="col-md-4">
@@ -155,7 +155,7 @@
                   <div class="row">
                      <div class="col-md-4">
                         <div class="form-group">
-                           <select id="test" name="test">
+                           <select id="tests" name="tests">
                               @foreach($role as $permission)
                               <option class="dropdown-item" value="{{ $permission->id }}">{{ $permission->name }}</option>
                               @endforeach
@@ -165,17 +165,14 @@
                   </div>
                   {{Form::submit( trans('Add'), ['class'=>'btn btn-primary pull-right'])}}
                   {!!Form::close()!!}
+                  <div class="col-md-8">
+                     <a href="{{ route('admin.adminuser.index')}}" class="btn btn-primary pull-left">Cancel</a>
+                  </div>
                   <div class="clearfix"></div>
                   <!-- </form> -->
                </div>
             </div>
-            <div class="card">
-               <div class="card-header card-header-primary">
-                  <a href="{{ route('admin.adminuser.index')}}">
-                     <h4 class="card-title"><i class="fa fa-hand-o-left" aria-hidden="true"></i> {{ trans('Back')}}</h4>
-                  </a>
-               </div>
-            </div>
+            
          </div>
       </div>
    </div>

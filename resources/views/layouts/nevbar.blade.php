@@ -16,9 +16,9 @@
         </a>
     </li> -->
       @can('view-admin-table')
-    <li class="nav-item {{ request()->is('*adminuser*') ? 'active' : '' }}">
+      <li class="nav-item {{ request()->is('*adminuser*') ? 'active' : '' }}">
          <a class="nav-link" href="{{ route('admin.adminuser.index') }}">
-            <i class="material-icons">content_paste</i>
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
             <p>{{ trans('Admin User') }}</p>
          </a>
       </li>
@@ -104,7 +104,6 @@
                </span>
                <span class="menu-title">{{ trans('Access') }}</span>
                <i class="menu-arrow"></i>
-
             </a>
             <div class="collapse" id="ui-basics">
                <ul class="nav flex-column sub-menu">

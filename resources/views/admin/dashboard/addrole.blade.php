@@ -1,6 +1,10 @@
 @extends('layouts.master')
 @push('css')
 <style>
+   .error {
+      color: red;
+   }
+
    .MultiCheckBox {
       border: 1px solid #e2e2e2;
       padding: 5px;
@@ -66,12 +70,11 @@
    }
 </style>
 @endpush
-
 @section('content')
 <div class="content">
    <div class="container-fluid">
       <div class="row">
-         <div class="col-md-8">
+         <div class="col-md-12">
             <div class="card">
                <div class="card-header card-header-primary">
                   <h4 class="card-title">{{ trans('Add Role')}}</h4>
@@ -79,24 +82,57 @@
                </div>
                <div class="card-body">
                   <!-- <form> -->
-                  {!! Form::open(['route'=> array('admin.role.store'), 'id' => 'teams_form']) !!}
+                  {!! Form::open(['route'=> array('admin.role.store'), 'id' => 'role_form']) !!}
                   @csrf
                   <!-- -------------------------------------- Name ------------------------------------ -->
                   <div class="row">
                      <div class="col-md-12">
                         <div class="form-group">
                            <label class="bmd-label-floating">{{ Form::label('name',trans('Name'))}}</label>
-                           {{Form::text('name','',['class'=>'form-control'])}}
+                           {{Form::text('name','',['class'=>'form-control name'])}}
                            @error('name')
                            <span role="alert">
                               <strong style="color:red;">{{ $message }}</strong>
                            </span>
                            @enderror
                         </div>
+                        <p id="duplicat_name"></p>
                      </div>
                   </div>
-                 
-                  <div class="row">
+                  <div class="clearfix"></div>
+                  <!-- ---------------------------- Table ----------------------------------- -->
+                  </label>
+                  <h3>{{ trans('Please Select Permission')}}</h3>
+                  <div class="table-responsive">
+                     <table class="table">
+                        <thead>
+                           <tr>
+                              <th>{{ trans('Module Name')}}</th>
+                              <th>{{ trans('Create')}}</th>
+                              <th>{{ trans('Update')}}</th>
+                              <th>{{ trans('View')}}</th>
+                              <th>{{ trans('Delete')}}</th>
+                           </tr>
+                        </thead>
+                        @php $n=1; @endphp
+                        @foreach($permission as $value)
+                        @if($n == 1)
+                        <tr>
+                           <td><b>{{$value->module_name}}</b></td>
+                           @endif
+                           <td>
+                              <input type="checkbox" class="permision_check" name="permission[]" value="{{$value->id}}"> {{ $value->name }}
+                           </td>
+                           @if($n == 4)
+                        </tr>
+                        @php $n=0; @endphp
+                        @endif
+                        @php $n++; @endphp
+                        @endforeach
+                     </table>
+                  </div>
+                  <!-- ------------------------------------------------------------------ -->
+                  <!-- <div class="row">
                      <div class="col-md-4">
                         <div class="form-group">
                            <select id="test" name="test[]">
@@ -106,10 +142,16 @@
                            </select>
                         </div>
                      </div>
-                  </div>
-                  {{Form::submit('Add Role', ['class'=>'btn btn-primary pull-right'])}}
+                  </div> -->
+                  {{Form::submit('Add Role', ['class'=>'btn btn-primary pull-right add'])}}
                   {!!Form::close()!!}
-                  <div class="clearfix"></div>
+               </div>
+               <div class="card">
+                  <div class="card-header card-header-primary">
+                     <a href="{{ route('admin.role.index')}}">
+                        <h4 class="card-title"><i class="fa fa-hand-o-left" aria-hidden="true"></i> {{ trans('Back')}}</h4>
+                     </a>
+                  </div>
                </div>
             </div>
          </div>
@@ -120,6 +162,18 @@
 
 @push('js')
 <script>
+   $('#role_form').validate({
+      rules: {
+         name: {
+            required: true,
+         },
+      },
+      errorElement: 'span',
+      messages: {
+         name: 'Please Enter Role Name!',
+      },
+   });
+
    $(document).ready(function() {
       $(document).on("click", ".MultiCheckBox", function() {
          var detail = $(this).next();
@@ -168,6 +222,45 @@
             container.hide();
          }
       });
+      // =================================================================
+      $('.name').blur(function() {
+         var error_phone = '';
+         var name = $('.name').val();
+         var _token = $('input[name = "_token"]').val();
+         var filter = /(^([a-zA-z ]+)(\d+)?$)/u;
+         if (!filter.test(name)) {
+            $('#error').addClass('has-error');
+            $('#duplicat_name').html('<label class = "text-danger">Invaild Role Name</label>');
+            $('.add').attr('disabled', 'disabled');
+         } else {
+            $.ajax({
+               url: "{{ route('admin.checkname')}}",
+               method: "POST",
+               data: {
+                  name: name,
+                  _token: _token
+               },
+               success: function(result) {
+                  if (result != 'Name_Exists') {
+                     $('#duplicat_name').html(
+                        '<label class = "text-success">Role Name Available</label>'
+                     );
+                     $('.name').removeClass('has-error');
+                     $('.add').attr('disabled', false);
+                  } else if (result != 'Unique') {
+                     $('#duplicat_name').html(
+                        '<label class = "text-danger">Role Name is already exits.</label>'
+                     );
+                     $('#mobile').addClass('has-error');
+                     $('.add').attr('disabled', false);
+                  }
+               }
+
+            })
+         }
+      });
+      // =================================================================
+
    });
 
    var defaultMultiCheckBoxOption = {

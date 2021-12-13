@@ -85,9 +85,12 @@ Route::group(['middleware' => 'auth:admin'], function () {
     
     // ---------------------------------------- Permission ---------------------------------------
     Route::resource('permission', Auth\PermissionController::class)->middleware(['permission:view-permission-table']);
+    Route::post('modulename','Auth\PermissionController@moduleName')->name('modulename');
 
     // ---------------------------------------- Permission ---------------------------------------
     Route::resource('role', Auth\RoleController::class)->middleware(['permission:view-role-table']);
+    Route::post('checkname','Auth\RoleController@checkName')->name('checkname');
+
     // ---------------------------------------- Admin ---------------------------------------
     Route::resource('adminuser', Auth\AdminController::class)->middleware(['permission:view-admin-table']);
 });

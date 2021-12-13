@@ -54,6 +54,39 @@
     })
   });
   // ---------------------------------------Delete-----------------------------
+  $(document).on('click', '.delete', function() {
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this imaginary file!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          var delet = $(this).data('id');
+          var url = '{{route("admin.premium.destroy", ":queryId")}}';
+          url = url.replace(':queryId', delet);
+          $.ajax({
+            url: url,
+            type: "DELETE",
+            data: {
+              id: delet,
+              _token: '{{ csrf_token() }}'
+            },
+            dataType: "json",
+            success: function(data) {
+              $('#premiumdatatable-table').DataTable().ajax.reload();
+            }
+          });
+          swal("Poof! Your imaginary file has been deleted!", {
+            icon: "success",
+          });
+        } else {
+          swal("Your imaginary file is safe!");
+        }
+      });
+  });
     
 </script>
 {!! $dataTable->scripts() !!}

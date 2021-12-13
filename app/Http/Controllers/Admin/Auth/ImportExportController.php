@@ -32,7 +32,7 @@ class ImportExportController extends Controller
     public function import(Request $request) 
     {
         $this->validate($request,[
-            'file' => 'required|mimes:xls,xlsx'
+            'file' => 'required|mimes:xlsx'
         ]);
         Excel::import(new UsersImport,request()->file('file'));
              

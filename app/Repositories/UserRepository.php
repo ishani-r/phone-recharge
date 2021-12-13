@@ -4,8 +4,6 @@ use App\Contracts\UserContract;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
-
-
 class UserRepository implements UserContract
 {
     public function store(array $array)

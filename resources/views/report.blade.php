@@ -289,8 +289,10 @@ Work Report 22/11/2021
 - solve some error
 
 Ishani Ranpariya
-MR :: 24/11/2021
-- self testing and solve error
+MR :: 2/12/2021
+Today I am working on below points
+- list subadmin in display assign role
+- solve previous error
 
 Ishani Ranpariya
 Work Report 23/11/2021
@@ -331,8 +333,51 @@ Work Report 30/11/2021
 - edit role in selected permission is checked (working)
 - self testing and solve error
 
+Ishani Ranpariya
+Work Report 1/12/2021
+- admin add subadmin with validation
+- admin update/delete subadmin
+- change dropdown on add/update role
+- solve some error
+
+Ishani Ranpariya
+Work Report 02/12/2021
+- add role in set exists name validation
+- list subadmin in display assign role
+- admin in edit assign role 
+- set unique email validation in edit admin/ edit package
+- testing and solve error
+
+Ishani Ranpariya
+MR :: 09/12/2021
+- Today i am reading of below points
+   - ‘array_is_list()’, ‘fsync()’ and ‘fdatasync()’
+   - Understand some topics in laravel
+   
+Ishani Ranpariya
+Work Report 09/12/2021
+- Understand below points
+- ‘array_is_list()’, ‘fsync()’, ‘fdatasync()’
+- Array Unpacking Support for String-Keyed Arrays
+   - ‘full_path’ Key in ‘$_FILES’ for Directory Uploads
+   - ‘IntlDatePatternGenerator’ Class
+   - solve error in smallcricle project
+   
+   Ishani Ranpariya
+   MR :: 11/12/2021
+   - solve testing error
+   
+Ishani Ranpariya
+Work Report 09/12/2021
+- Understand some module
+- Admin Panel in set validation
+- Testing channal panal and solve some error
+
+
 var a = $(this).attr("rolePermissions");
                alert(a);
+
+sir role and permission complete thai gayu che to aek var testing karsho
 <!-- ------------------------------------------------------------------------ -->
 @extends('layouts.master')
 @section('content')
@@ -839,3 +884,45 @@ ORDER BY `messages`.`created_at`  ASC
 add-help-question-answer
 
 {{$permission->id == $a->permission_id ? 'checked' : ''}}
+
+
+permission Add
+Role unique validation add and edit name
+
+406 - Not Acceptable = 
+405 - Method Not Allowed = jayare method wrong hoy tayare
+409 - Conflict
+ = some request fail
+200 - ok = All User resource are fetched.
+201 - Created - A new User resource is created.
+404 Not Found (page or other resource doesn’t exist)
+401 Not authorized (not logged in)
+403 Logged in but access to requested area is forbidden
+400 Bad request (something wrong with URL or parameters)
+422 Unprocessable Entity (validation failed)
+500 General server error
+
+reqCount = 1
+fCount = 1
+isFriend = "0"
+
+if(reqCount > 0){
+   isFriend = "2
+}
+
+if(fCount > 0){
+isFriend = "1"
+}
+
+@if(reqCount > 0) ? isFriend = "2" : NUll;
+@if(fCount > 0) ? isFriend = "1" : NUll;
+
+@if(reqCount > 0) ? isFriend = "2" : isFriend = "1";
+
+@if(reqCount > 0) ? isFriend = "2" : ((fCount > 0) ? isFriend = "1" : "other");
+
+
+Business info in upload image message color red
+
+Business Registration No = 21 digit 
+D&B Number = 9 digit

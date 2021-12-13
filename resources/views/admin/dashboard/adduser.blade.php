@@ -220,43 +220,43 @@
       $(document).ready(function() {
 
          $('#user_form').validate({
-            // rules: {
-            //    name: {
-            //       required: true,
-            //    },
-            //    mobile: {
-            //       required: true,
-            //    },
-            //    email: {
-            //       required: true,
-            //    },
-            //    gender: {
-            //       required: true,
-            //    },
-            //    dob: {
-            //       required: true,
-            //    },
-            //    image: {
-            //       required: true,
-            //    },
-            //    password: {
-            //       required: true,
-            //    },
-            //    confirm_password: {
-            //       required: true,
-            //    }
-            // },
-            // errorElement: 'span',
-            // messages: {
-            //    name: 'Please Enter Your Name!',
-            //    mobile: 'Please Enter Your mobile!',
-            //    email: 'Please Enter Your Email!',
-            //    gender: 'Please Select Your Gender!',
-            //    dob: 'Please Enter Your Birth Date!',
-            //    image: 'Please Select Your Profile!',
-            //    password: 'Enter Your Password!',
-            //    confirm_password: 'Enter Your Confirm Password!',
-            // },
+            rules: {
+               name: {
+                  required: true,
+               },
+               mobile: {
+                  required: true,
+               },
+               email: {
+                  required: true,
+               },
+               gender: {
+                  required: true,
+               },
+               dob: {
+                  required: true,
+               },
+               image: {
+                  required: true,
+               },
+               password: {
+                  required: true,
+               },
+               confirm_password: {
+                  required: true,
+               }
+            },
+            errorElement: 'span',
+            messages: {
+               name: 'Please Enter Your Name!',
+               mobile: 'Please Enter Your mobile!',
+               email: 'Please Enter Your Email!',
+               gender: 'Please Select Your Gender!',
+               dob: 'Please Enter Your Birth Date!',
+               image: 'Please Select Your Profile!',
+               password: 'Enter Your Password!',
+               confirm_password: 'Enter Your Confirm Password!',
+            },
          });
 
          $(document).on("click", ".MultiCheckBox", function() {

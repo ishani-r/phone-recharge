@@ -169,6 +169,9 @@
                   </div>
                   {{Form::submit('Update Profile', ['class'=>'btn btn-primary pull-right'])}}
                   {!!Form::close()!!}
+                  <div class="col-md-8">
+                     <a href="{{ route('admin.dashboard.index')}}" class="btn btn-primary pull-left">Cancel</a>
+                  </div>
                   <div class="clearfix"></div>
                   <!-- </form> -->
                </div>

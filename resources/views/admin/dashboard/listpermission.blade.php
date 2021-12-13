@@ -12,6 +12,9 @@
                   <h4 class="card-title">{{ trans('Permission Table')}}</h4>
                   <p class="card-category"> {{ trans('Here is a List for Permission')}}</p>
                </div>
+               <div>
+                  <a href="{{ route('admin.permission.create') }}" class="btn btn-success">{{ trans('Add Permission')}}</a>
+               </div>
                <div class="card-body">
                   <div class="table-responsive-sg">
                      {!! $dataTable->table(['class' => 'table table-bordered dt-responsive nowrap']) !!}

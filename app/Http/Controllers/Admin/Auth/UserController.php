@@ -21,6 +21,9 @@ class UserController extends Controller
     public function __construct(UserContract $User)
     {
         $this->User = $User;
+        $this->middleware('permission:view-user-data', ['only' => ['show']]);
+        $this->middleware('permission:update-user-data', ['only' => ['edit','update']]);
+        $this->middleware('permission:delete-user-data', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.

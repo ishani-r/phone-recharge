@@ -12,6 +12,7 @@ use App\Http\Controllers\API\MessageController;
 use App\Http\Controllers\API\HelpController;
 use App\Http\Controllers\API\FollowController;
 use App\Http\Controllers\API\ForgotPasswordController;
+use App\Http\Controllers\API\AuthApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,22 +30,27 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // -------------------------- User --------------------------
-Route::post('login', [LoginController::class, 'login']);
-Route::post('insertuser', [UserController::class, 'store']);
-Route::get('showuser/{id?}', [UserController::class, 'show']);
-Route::put('updateuser/{id}', [UserController::class, 'update']);
-Route::delete('deleteuser/{id}', [UserController::class, 'destroy']);
+Route::post('login',                [LoginController::class, 'login']);
+Route::post('insertuser',           [UserController::class, 'store']);
+Route::get('showuser/{id?}',        [UserController::class, 'show']);
+Route::put('updateuser/{id}',       [UserController::class, 'update']);
+Route::delete('deleteuser/{id}',    [UserController::class, 'destroy']);
 
 // ---------------------------------------- Mail ---------------------------------------
 Route::post('sendmail', [ForgotPasswordController::class, 'sendMail']);
 Route::post('otpsend', [ForgotPasswordController::class, 'otpSend']);
+
+Route::post('createToken', [AuthApiController::class, 'createToken']);
+Route::group(['middleware' => 'AuthenticateApi'], function () {
+    Route::post('friend-details', 'Api\UserController@friendDetails');
+});
 
 Route::group(['middleware' => 'auth:api'], function () {
     // -------------------------- User Detail -------------------------
     Route::post('insertuserdetail', [UserDetailsController::class, 'store']);
     Route::get('showuserdetail/{id?}', [UserDetailsController::class, 'show']);
     Route::put('updateuserdetail/{id}', [UserDetailsController::class, 'update']);
-    Route::delete('deleteuserdetail/{id}', [UserDetailsController::class, 'destroy']);  
+    Route::delete('deleteuserdetail/{id}', [UserDetailsController::class, 'destroy']);
 
     // -------------------------------------- Like ----------------------------
     Route::post('likeinsert', [LikeController::class, 'like']);
@@ -66,7 +72,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     // -------------------------------------- Message ----------------------------
     Route::post('sendmessage', [MessageController::class, 'store']);
     Route::get('showmessage', [MessageController::class, 'show']);
-    
+
     // -------------------------------------- Help ----------------------------
     Route::get('showanswer', [HelpController::class, 'show']);
     Route::post('contect', [HelpController::class, 'store']);
@@ -75,5 +81,4 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('sendrequest', [FollowController::class, 'sendRequest']);
     Route::get('showrequest', [FollowController::class, 'showRequest']);
     Route::post('acceptrequest', [FollowController::class, 'acceptRequest']);
-
 });
