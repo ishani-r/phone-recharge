@@ -41,9 +41,9 @@ class PointDatatable extends DataTable
             ->editColumn('status', function ($data) {
                 if($data['status'] == 'Active')
                 {
-                    return '<button type="button" data-id="'.$data->id.'" class="badge rounded-pill bg-success status"> Active </button>';
+                    return '<button type="button" data-id="'.$data->id.'" class="status"> Active </button>';
                 }else{
-                    return '<button type="button" data-id="'.$data->id.'" class="badge rounded-pill bg-danger status"> Deactive </button>';
+                    return '<button type="button" data-id="'.$data->id.'" class="status"> Deactive </button>';
                 }
             })
 

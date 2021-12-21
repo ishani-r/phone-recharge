@@ -429,6 +429,11 @@ Today I am working on below points
 - set validation unique store name
 - list brand 
 
+Ishani Ranpariya
+Work Report 21/12/2021
+- edit store done with validation
+- Working on new Task
+
 Admin side
 - category complate
 - brand and sub-category working

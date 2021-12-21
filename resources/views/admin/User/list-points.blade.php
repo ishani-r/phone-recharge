@@ -26,6 +26,8 @@
 @endsection
 @push('js')
 <script>
+    $(document).ready(function(){
+
     $(document).load(function(){
         alert('ishani');
     });
@@ -53,6 +55,8 @@
          }
       })
    });    
+});
+
 </script>
 {!! $dataTable->scripts() !!}
 @endpush
