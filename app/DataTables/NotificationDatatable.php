@@ -73,13 +73,13 @@ class NotificationDatatable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id')->data('DT_RowIndex'),
-            Column::make('sender_user_id'),
-            Column::make('title'),
-            Column::make('message'),
-            Column::make('reciever_id'),
-            Column::make('status'),
-            Column::computed('action')
+            Column::make('id')->data('DT_RowIndex')->title(trans('id')),
+            Column::make('sender_user_id')->title(trans('sender_user_id')),
+            Column::make('title')->title(trans('title')),
+            Column::make('message')->title(trans('message')),
+            Column::make('reciever_id')->title(trans('reciever_id')),
+            Column::make('status')->title(trans('status')),
+            Column::computed('action')->title(trans('action'))
                   ->exportable(false)
                   ->printable(false)
                   ->width(60)

@@ -24,6 +24,7 @@
                         <!-- <p class="card-category">Complete your Package</p> -->
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

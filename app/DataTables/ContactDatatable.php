@@ -71,11 +71,11 @@ class ContactDatatable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id')->data('DT_RowIndex'),
-            Column::make('subject'),
-            Column::make('email'),
-            Column::make('message'),
-            Column::computed('action')
+            Column::make('id')->data('DT_RowIndex')->title(trans('id')),
+            Column::make('subject')->title(trans('subject')),
+            Column::make('email')->title(trans('email')),
+            Column::make('message')->title(trans('message')),
+            Column::computed('action')->title(trans('action'))
                   ->exportable(false)
                   ->printable(false)
                   ->width(60)

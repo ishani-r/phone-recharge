@@ -98,15 +98,15 @@ class UsersDatatable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id')->data('DT_RowIndex'),
-            Column::make('name'),
-            Column::make('mobile'),
-            Column::make('email'),
-            Column::make('gender'),
-            Column::make('dob'),
-            Column::make('image'),
-            Column::make('status'),
-            Column::computed('action')
+            Column::make('id')->data('DT_RowIndex')->title(trans('id')),
+            Column::make('name')->title(trans('name')),
+            Column::make('mobile')->title(trans('mobile')),
+            Column::make('email')->title(trans('email')),
+            Column::make('gender')->title(trans('gender')),
+            Column::make('dob')->title(trans('dob')),
+            Column::make('image')->title(trans('image')),
+            Column::make('status')->title(trans('status')),
+            Column::computed('action')->title(trans('action'))
                 ->exportable(false)
                 ->printable(false)
                 ->width(60)

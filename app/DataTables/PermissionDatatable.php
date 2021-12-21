@@ -84,11 +84,11 @@ class PermissionDatatable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id')->data('DT_RowIndex'),
-            Column::make('name'),
+            Column::make('id')->data('DT_RowIndex')->title(trans('id')),
+            Column::make('name')->title(trans('name')),
             // Column::make('guard_name'),
             // Column::make('status'),
-            Column::computed('action')
+            Column::computed('action')->title(trans('action'))
                   ->exportable(false)
                   ->printable(false)
                   ->width(60)

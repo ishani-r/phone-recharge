@@ -366,12 +366,78 @@ Work Report 09/12/2021
    Ishani Ranpariya
    MR :: 11/12/2021
    - solve testing error
+
+Ishani Ranpariya
+MR :: 15/12/2021
+- revising laravel features
+- creating sql query on the requirments
+- solve previous error
    
 Ishani Ranpariya
 Work Report 09/12/2021
 - Understand some module
 - Admin Panel in set validation
 - Testing channal panal and solve some error
+
+Ishani Ranpariya
+Work Report 15/12/2021
+- setup new project
+- understand/analysis new project
+- download admin panal and setup
+
+Ishani Ranpariya
+MR :: 16/12/2021
+- setup admin panal
+- perform register/login
+
+
+Ishani Ranpariya
+Work Report 12/16/2021
+- setup admin panal
+- create individual seller register form
+- seller register working
+- solve pull/push error
+
+Ishani Ranpariya
+MR :: 17/12/2021
+Today I am working on below points
+- Seller register/ login 
+- verify otp, forgot password 
+
+Ishani Ranpariya
+Work Report 17/12/2021
+- register/login complete
+- verify register otp done 
+- solve some error
+
+Ishani Ranpariya
+MR :: 20/12/2021
+Today I am working on below points
+- seller create store module 
+- display store list(manage status,Approved,Action)
+
+Ishani Ranpariya
+Work Report 20/12/2021
+- create store done with validation
+- list store (manage status) done
+- Some error solve
+
+Ishani Ranpariya
+MR :: 21/12/2021
+Today I am working on below points
+- list store in manage action (edit, show delete)
+- set validation unique store name
+- list brand 
+
+Admin side
+- category complate
+- brand and sub-category working
+
+seller side
+- create store with unique store name validation done
+- store list done with status
+- working on store action 
+- working on Product Module 
 
 
 var a = $(this).attr("rolePermissions");
@@ -926,3 +992,27 @@ Business info in upload image message color red
 
 Business Registration No = 21 digit 
 D&B Number = 9 digit
+
+
+Thank U @vipul sir @vikash sir & @sharika ma'am so mush for orgnize the Test we all enjoyed it..We all wants that to give this kind of test every week to stay foused and give Our 100% of Learing
+
+Yes sir, we agree
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.0/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+@extends('Seller.layouts.master')
+@section('content')
+<div class="card-body">
+    <div class="table-responsive-sg">
+        {!! $dataTable->table()!!}
+    </div>
+</div>
+@endsection
+@push('js')
+{!! $dataTable->scripts() !!}
+@endpush
+
+
+$showpost = Post::where('user_id', Auth::Guard('web')->user()->id)->pluck('title_name','image')->toArray();
+        // dd($showpost);

@@ -36,7 +36,7 @@
         Tip 2: you can also add an image using data-image tag
     -->
 
-      @include('layouts.nevbar')
+      @include('layouts.nevbar')         
     </div>
   </div>
   <div class="main-panel">

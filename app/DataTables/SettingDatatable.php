@@ -85,11 +85,11 @@ class SettingDatatable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id')->data('DT_RowIndex'),
-            Column::make('terms_and_conditions'),
-            Column::make('privacy_policy'),
-            Column::make('status'),
-            Column::computed('action')
+            Column::make('id')->data('DT_RowIndex')->title(trans('id')),
+            Column::make('terms_and_conditions')->title(trans('terms_and_conditions')),
+            Column::make('privacy_policy')->title(trans('privacy_policy')),
+            Column::make('status')->title(trans('status')),
+            Column::computed('action')->title(trans('action'))
                   ->exportable(false)
                   ->printable(false)
                   ->width(60)

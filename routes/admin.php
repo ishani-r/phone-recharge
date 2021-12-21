@@ -10,6 +10,7 @@ Route::group(['namespace' => 'Auth'], function () {
 });
 
 Route::group(['middleware' => 'auth:admin'], function () {
+    Route::get('request-status',        'Auth\PointController@requestStatus')->name('request_status');
     Route::get('dashboard/content', function () {
         return view('admin.dashboard.content');
     })->name('main');
@@ -36,7 +37,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     // --------------------------------------Admin Profile-------------------------------------------
     Route::put('update-profile/{id}', 'Auth\ProfileController@updateProfile')->name('update_profile');
     Route::get('dashboard/profile', 'Auth\ProfileController@showProfile')->name('showprofile');
-
+    
     // ------------------------------------ change status -----------------------------------------
     Route::get('dashboard/change', 'Auth\ProfileController@changeStatus')->name('changestatus');
     Route::get('details/change', 'Auth\ProfileController@statusChange')->name('statuschange');
@@ -44,27 +45,27 @@ Route::group(['middleware' => 'auth:admin'], function () {
         return view('admin.dashboard.changepassword');
     })->name('changepassword');
     Route::post('dashboard/changepass/{id}', 'Auth\ProfileController@changePassword')->name('changepass');
-
+    
     // --------------------------------------User Profile-------------------------------------------
     Route::resource('dashboard', Auth\UserController::class)->middleware(['permission:view-user-table']);
     Route::resource('details', Auth\UserDetailsController::class)->middleware(['permission:view-userdetail-table']);
-
+    
     // ---------------------------------------- Like ---------------------------------------
     Route::get('notification', 'Auth\LikeController@notification')->name('notification')->middleware(['permission:view-notification']);
     Route::delete('delete/{id}', 'Auth\LikeController@destroy')->name('delete');
-
+    
     // ---------------------------------------- Premium Package ---------------------------------------
     Route::resource('premium', Auth\PremiumController::class);
     // ---------------------------------------- Setting ---------------------------------------
     Route::resource('setting', Auth\Settingcontroller::class);
-
+    
     // ---------------------------------------- Localization ---------------------------------------
     Route::get('index', 'Auth\LocalizationController@index')->name('language')->middleware(['permission:view-language']);
     Route::get('change/lang', 'Auth\LocalizationController@langchange')->name('LangChange');
-
+    
     // ---------------------------------------- Help ---------------------------------------
     Route::resource('help', Auth\HelpController::class);
-
+    
     // ---------------------------------------- Contact US ---------------------------------------
     Route::get('contactus', 'Auth\ContactController@contactUs')->name('contactus')->middleware(['permission:view-contacts-replay']);
     Route::get('replay/{id}', 'Auth\ContactController@replay')->name('replay');
@@ -77,7 +78,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('importExportView', [ImportExportController::class, 'importExportView']);
     Route::get('export', [ImportExportController::class, 'export'])->name('export');
     Route::post('import', [ImportExportController::class, 'import'])->name('import');
-
+    
     // ---------------------------------------- PDF ---------------------------------------
     Route::get('getAllPackage', 'Auth\PdfController@getAllPackage');
     Route::get('exportPDF', 'Auth\PdfController@exportPDF')->name('exportpdf');
@@ -86,11 +87,18 @@ Route::group(['middleware' => 'auth:admin'], function () {
     // ---------------------------------------- Permission ---------------------------------------
     Route::resource('permission', Auth\PermissionController::class)->middleware(['permission:view-permission-table']);
     Route::post('modulename','Auth\PermissionController@moduleName')->name('modulename');
-
+    
     // ---------------------------------------- Permission ---------------------------------------
     Route::resource('role', Auth\RoleController::class)->middleware(['permission:view-role-table']);
     Route::post('checkname','Auth\RoleController@checkName')->name('checkname');
-
+    
     // ---------------------------------------- Admin ---------------------------------------
     Route::resource('adminuser', Auth\AdminController::class)->middleware(['permission:view-admin-table']);
+    
+    // Point
+    // User Post
+    Route::get('list-user',             'Auth\UserPostController@listUser')->name('list_user');
+    Route::get('status-user',           'Auth\UserPostController@statusUser')->name('status_user');
+    Route::delete('destroy-User/{id}',  'Auth\UserPostController@destroyUser')->name('destroy_user');
+    Route::get('list-point',            'Auth\UserPostController@listPoint')->name('list_point');
 });

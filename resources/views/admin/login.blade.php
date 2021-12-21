@@ -7,7 +7,7 @@
 </head>
 <style>
     body{
-        background-image: url("{{asset('admin/assets/images/soulmate2.jpg')}}");
+        background-image: url("{{asset('admin/assets/images/phone12.jpg')}}");
         background-attachment: fixed;
         background-repeat: no-repeat;
         background-position: center;

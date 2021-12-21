@@ -9,6 +9,18 @@
             <p>{{ trans('Dashboard') }}</p>
          </a>
       </li>
+      <li class="nav-item {{ request()->is('*list-user*') ? 'active' : '' }}">
+         <a class="nav-link" href="{{route('admin.list_user')}}">
+            <i class="material-icons">person</i>
+            <p>User List</p>
+         </a>
+      </li>
+      <li class="nav-item {{ request()->is('*list-point*') ? 'active' : '' }}">
+         <a class="nav-link" href="{{route('admin.list_point')}}">
+            <i class="material-icons">person</i>
+            <p>Point Details</p>
+         </a>
+      </li>
       <!-- <li class="nav-item {{ request()->is('*profile*') ? 'active' : '' }}">
         <a class="nav-link" href="{{route('admin.showprofile')}}">
             <i class="material-icons">person</i>
@@ -16,6 +28,14 @@
         </a>
     </li> -->
       @can('view-admin-table')
+      <li class="nav-item {{ request()->is('*adminuser*') ? 'active' : '' }}">
+         <a class="nav-link" href="{{ route('admin.adminuser.index') }}">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+            <p>{{ trans('Admin User') }}</p>
+         </a>
+      </li>
+      @endcan
+      <!-- @can('view-admin-table')
       <li class="nav-item {{ request()->is('*adminuser*') ? 'active' : '' }}">
          <a class="nav-link" href="{{ route('admin.adminuser.index') }}">
             <i class="fa fa-user-plus" aria-hidden="true"></i>
@@ -54,7 +74,7 @@
             <p>{{ trans('Package Table List') }}</p>
          </a>
       </li>
-      @endcan
+      @endcan -->
       <!-- <li class="nav-item {{ request()->is('*notification*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('admin.notification') }}">
             <i class="material-icons">notifications</i>
@@ -62,7 +82,7 @@
         </a>
     </li> -->
       <!-- ------------------------------------------------------------------------------  -->
-      @can('create-terms')
+      <!-- @can('create-terms')
       <ul class="nav">
          <li class="nav-item menu-items {{ request()->is('*setting*') ? 'active' : '' }}">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
@@ -93,9 +113,9 @@
             </div>
          </li>
       </ul>
-      @endcan
+      @endcan -->
       <!-- ------------------------------------------------------------------------------  -->
-      @can('view-access')
+      <!-- @can('view-access')
       <ul class="nav">
          <li class="nav-item menu-items {{ request()->is('*setting*') ? 'active' : '' }}">
             <a class="nav-link" data-toggle="collapse" href="#ui-basics" aria-expanded="false" aria-controls="ui-basics">
@@ -117,5 +137,5 @@
             </div>
          </li>
       </ul>
-      @endcan
+      @endcan -->
    </ul>
