@@ -24,8 +24,8 @@ class UserPostDatatable extends DataTable
             // ->addColumn('action', 'userpostdatatable.action');
             ->addColumn('action', function($data){
                 $result = '<div class="btn-group">';
-                // $result .= '<a href="'.route('admin.premium.show',$data->id).'"><button class="btn-sm btn-outline-warning" style="border-radius: 2.1875rem;"><i class="fa fa-eye" aria-hidden="true"></i></button></a>';
-                $result .= '<a href="'.route('admin.permission.edit',$data->id).'"><button class="btn-sm btn-outline-info" style="border-radius: 2.1875rem;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>';
+                $result .= '<a href="'.route('admin.show_user_list',$data->id).'"><button class="btn-sm btn-outline-warning" style="border-radius: 2.1875rem;"><i class="fa fa-eye" aria-hidden="true"></i></button></a>';
+                // $result .= '<a href="'.route('admin.permission.edit',$data->id).'"><button class="btn-sm btn-outline-info" style="border-radius: 2.1875rem;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>';
                 $result .= '<button type="submit" data-id="'.$data->id.'" class="btn-sm btn-outline-danger delete" style="border-radius: 2.1875rem;"><i class="fa fa-trash" aria-hidden="true"></i></button></form></div>';
                 return $result;
             })

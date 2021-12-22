@@ -6,18 +6,19 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\DataTables\UserPostDatatable;
-use App\DataTables\PointDatatable;
 
 class UserPostController extends Controller
 {
+    
     public function listUser(UserPostDatatable $UserPostDatatable)
     {
         return $UserPostDatatable->render('admin.User.list-user');
     }
 
-    public function listPoint(PointDatatable $PointDatatable)
+    public function showUserList($id)
     {
-        return $PointDatatable->render('admin.User.list-points');
+        $data = User::find($id);
+        return view('admin.user.view-user', compact('data'));
     }
 
     public function statusUser(Request $request)

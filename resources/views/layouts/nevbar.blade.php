@@ -15,8 +15,14 @@
             <p>User List</p>
          </a>
       </li>
-      <li class="nav-item {{ request()->is('*list-point*') ? 'active' : '' }}">
+      <!-- <li class="nav-item {{ request()->is('*list-point*') ? 'active' : '' }}">
          <a class="nav-link" href="{{route('admin.list_point')}}">
+            <i class="material-icons">person</i>
+            <p>Point Details</p>
+         </a>
+      </li> -->
+      <li class="nav-item {{ request()->is('*list-point*') ? 'active' : '' }}">
+         <a class="nav-link" href="{{route('admin.point_list')}}">
             <i class="material-icons">person</i>
             <p>Point Details</p>
          </a>
@@ -27,14 +33,14 @@
             <p>Admin Profile</p>
         </a>
     </li> -->
-      @can('view-admin-table')
+      <!-- @can('view-admin-table')
       <li class="nav-item {{ request()->is('*adminuser*') ? 'active' : '' }}">
          <a class="nav-link" href="{{ route('admin.adminuser.index') }}">
             <i class="fa fa-user-plus" aria-hidden="true"></i>
             <p>{{ trans('Admin User') }}</p>
          </a>
       </li>
-      @endcan
+      @endcan -->
       <!-- @can('view-admin-table')
       <li class="nav-item {{ request()->is('*adminuser*') ? 'active' : '' }}">
          <a class="nav-link" href="{{ route('admin.adminuser.index') }}">

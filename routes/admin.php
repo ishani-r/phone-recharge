@@ -10,7 +10,13 @@ Route::group(['namespace' => 'Auth'], function () {
 });
 
 Route::group(['middleware' => 'auth:admin'], function () {
+
+    // point
+    Route::get('point-list',        'Auth\PointController@pointList')->name('point_list');
+    Route::get('send-request',        'Auth\PointController@sendRequest')->name('send_request');
+    Route::delete('destroy-Point/{id}',  'Auth\PointController@destroyPoint')->name('destroy_point');
     Route::get('request-status',        'Auth\PointController@requestStatus')->name('request_status');
+
     Route::get('dashboard/content', function () {
         return view('admin.dashboard.content');
     })->name('main');
@@ -97,8 +103,9 @@ Route::group(['middleware' => 'auth:admin'], function () {
     
     // Point
     // User Post
+    Route::get('list-point',            'Auth\UserPostController@listPoint')->name('list_point');
+    Route::get('show-user-list/{id}',            'Auth\UserPostController@showUserList')->name('show_user_list');
     Route::get('list-user',             'Auth\UserPostController@listUser')->name('list_user');
     Route::get('status-user',           'Auth\UserPostController@statusUser')->name('status_user');
     Route::delete('destroy-User/{id}',  'Auth\UserPostController@destroyUser')->name('destroy_user');
-    Route::get('list-point',            'Auth\UserPostController@listPoint')->name('list_point');
 });

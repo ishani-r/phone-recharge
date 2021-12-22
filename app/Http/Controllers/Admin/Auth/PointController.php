@@ -4,16 +4,54 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Point;
+use App\Models\User;
+use App\Models\Recharge;
+use App\Models\Notification;
 use Illuminate\Http\Request;
+use App\DataTables\PointListDatatable;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RechargeMail;
 
 class PointController extends Controller
 {
-    public function requestStatus(Request $request)
+
+    public function pointList(PointListDatatable $PointListDatatable)
     {
-        dd(1);
+        return $PointListDatatable->render('admin.User.point-list');
+    }
+
+    public function sendRequest(Request $request)
+    {
         $id = $request['id'];
         $user = Point::find($id);
         
+        if($user->user_send_request == "Pending")
+        {
+            $useremail = User::where('id', $user->user_id)->first();
+            
+            Mail::to($useremail->email)->send(new RechargeMail());
+            
+            $notification = new Notification();
+            $notification->user_id = $useremail->id;
+            $notification->message = "Your Recharge success...";
+            $notification->save();
+
+            $recharge = Recharge::find($user->id);
+            $recharge->status = "Succes";
+            $recharge->save();
+            $user->user_send_request = "Approved";
+        }else{
+            $user->user_send_request = "Pending";
+        }
+        $user->save();
+        return $user;
+    }
+
+    public function requestStatus(Request $request)
+    {
+        $id = $request['id'];
+        $user = Point::find($id);
+         
         if($user->status == "Active")
         {
             $user->status = "Deactive";
@@ -22,5 +60,12 @@ class PointController extends Controller
         }
         $user->save();
         return $user;
+    }
+
+    public function destroyPoint($id)
+    {   
+        $data = Point::find($id);
+        $data->delete();
+        return $data;
     }
 }

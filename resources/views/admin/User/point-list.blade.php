@@ -10,7 +10,7 @@
                 <div class="card">
                     <div class="card-header card-header-primary">
                         <h4 class="card-title">{{ trans('Point Table')}}</h4>
-                        <p class="card-category"> {{ trans('Here is a List for Users Points')}}</p>
+                        <p class="card-category"> {{ trans('Here is a List for Point')}}</p>
                     </div>
 
                     <div class="card-body">
@@ -25,10 +25,56 @@
 </div>
 @endsection
 @push('js')
-{!! $dataTable->scripts() !!}
+<script>
+    $(document).on('click', '.asdd', function() {
+        var id = $(this).data('id');
+        var number = $(this).attr('id', 'asds');
+        $.ajax({
+            url: "{{route('admin.send_request')}}",
+            type: 'get',
+            data: {
+                id: id,
+            },
+            dataType: "json",
+            success: function(data) {
+                $("#asds").removeAttr("class");
+                console.log(data.user_send_request);
+                if (data.user_send_request == "Panding") {
+                    $("#asds").addClass("btn btn-warning mr-1 mb-1 asdd");
+                } else {
+                    $("#asds").addClass("btn btn-success mr-1 mb-1 asdd");
+                }
+                $("#asds").html(data.status);
+                $('#pointlistdatatable-table').DataTable().ajax.reload();
+            }
+        })
+    });
+    // ---------------------------------------status-----------------------------
+    $(document).on('click', '.status', function() {
+        var id = $(this).data('id');
+        var number = $(this).attr('id', 'asd');
+        $.ajax({
+            url: "{{route('admin.request_status')}}",
+            type: 'get',
+            data: {
+                id: id,
+            },
+            dataType: "json",
+            success: function(data) {
+                $("#asd").removeAttr("class");
+                if (data.status == "Active") {
+                    $("#asd").addClass("badge rounded-pill bg-success status");
+                } else {
+                    $("#asd").addClass("badge rounded-pill bg-danger status");
+                }
+                $("#asd").html(data.status);
+                $('#pointlistdatatable-table').DataTable().ajax.reload();
+            }
+        })
+    });
 
-// ---------------------------------------Delete-----------------------------
-    $(document).on('click', '.delete', function() {
+      // ---------------------------------------Delete-----------------------------
+      $(document).on('click', '.delete', function() {
         swal({
                 title: "Are you sure?",
                 text: "Once deleted, you will not be able to recover this imaginary file!",
@@ -39,7 +85,7 @@
             .then((willDelete) => {
                 if (willDelete) {
                     var id = $(this).data('id');
-                    var url = '{{route("admin.destroy_user", ":queryId")}}';
+                    var url = '{{route("admin.destroy_point", ":queryId")}}';
                     url = url.replace(':queryId', id);
                     var number = $(this).attr('id', 'asd');
                     $.ajax({
@@ -62,4 +108,6 @@
                 }
             });
     });
+</script>
+{!! $dataTable->scripts() !!}
 @endpush

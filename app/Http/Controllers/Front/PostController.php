@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Recharge;
 use App\Models\Point;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -45,35 +47,43 @@ class PostController extends Controller
         return redirect()->route('home');
     }
 
-    public function sendRequest()
+    public function titleName(Request $request)
     {
+        if ($request->get('title_name')) {
+            $title_name = $request->get('title_name');
+            $data = DB::table("posts")->where('title_name', $title_name)->count();
+            if ($data > 0) {
+                return 'Name_Exists';
+            } else {
+                return 'Unique';
+            }
+        }
+    }
+
+    public function sendRequest(Request $request)
+    {
+        
         $total_point = Point::where('user_id', Auth::Guard('web')->user()->id)->first();
 
-        if ($total_point->total_point < 300) {
-            Session::flash("error", "Ooops Your Points is less than 300 points.....😔 ");
+        if ($total_point->total_point < 31) {
+            Session::flash("error", "Ooops Your Points is less than 30 points.....😔 ");
         } else {
             $id = $total_point->id;
             $point_request = Point::find($id);
-            $point_request->user_send_request = "0";
+            $point_request->user_send_request = "Panding";
+            $point_request->request_point = $request->request_point;
+            $point_request->total_point = $point_request->total_point - $request->request_point;
             $point_request->save();
+
+            $recharge = new Recharge();
+            $recharge->user_id = Auth::Guard('web')->user()->id;
+            $recharge->recharge_point = $request->request_point;
+            $recharge->total_point = $point_request->total_point;   
+            $recharge->status = "Panding";  
+            $recharge->save();
+
             Session::flash("success", "Request Send Suucessfully.....😊 ");
         }
         return redirect()->route('home');
-    }
-
-    public function requestStatus(Request $request)
-    {
-        dd(1);
-        $id = $request['id'];
-        $user = Point::find($id);
-        
-        if($user->status == "Active")
-        {
-            $user->status = "Deactive";
-        }else{
-            $user->status = "Active";
-        }
-        $user->save();
-        return $user;
     }
 }
