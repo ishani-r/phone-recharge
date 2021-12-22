@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Front\PostRequest;
+use App\Http\Requests\Front\RechargeRequest;
 
 class PostController extends Controller
 {
@@ -61,9 +62,8 @@ class PostController extends Controller
         }
     }
 
-    public function sendRequest(Request $request)
+    public function sendRequest(RechargeRequest $request)
     {
-        
         $total_point = Point::where('user_id', Auth::Guard('web')->user()->id)->first();
 
         if ($total_point->total_point < 31) {
