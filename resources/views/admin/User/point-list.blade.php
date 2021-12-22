@@ -39,7 +39,7 @@
             success: function(data) {
                 $("#asds").removeAttr("class");
                 console.log(data.user_send_request);
-                if (data.user_send_request == "Panding") {
+                if (data.user_send_request == "Approved") {
                     $("#asds").addClass("btn btn-warning mr-1 mb-1 asdd");
                 } else {
                     $("#asds").addClass("btn btn-success mr-1 mb-1 asdd");
