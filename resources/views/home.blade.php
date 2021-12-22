@@ -172,6 +172,7 @@
             },
             image: {
                required: true,
+					extension: "jpg|jpeg|png"
             },
          },
          messages: {

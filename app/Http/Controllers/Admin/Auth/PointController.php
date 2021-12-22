@@ -36,8 +36,10 @@ class PointController extends Controller
             $notification->message = "Your Recharge success...";
             $notification->save();
 
-            $recharge = Recharge::find($user->id);
+            $recharge = Recharge::select('id')->get()->last();
+            // dd($recharge);
             $recharge->status = "Succes";
+            // dd($recharge);
             $recharge->save();
             $user->user_send_request = "Approved";
         }else{

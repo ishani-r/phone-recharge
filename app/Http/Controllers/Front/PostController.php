@@ -10,10 +10,11 @@ use App\Models\Point;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\Front\PostRequest;
 
 class PostController extends Controller
 {
-    public function createPost(Request $request)
+    public function createPost(PostRequest $request)
     {
         $post = new Post();
         $post->user_id = Auth::Guard('web')->user()->id;

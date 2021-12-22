@@ -27,6 +27,7 @@
 @push('js')
 <script>
     $(document).on('click', '.asdd', function() {
+        alert('asd');
         var id = $(this).data('id');
         var number = $(this).attr('id', 'asds');
         $.ajax({
@@ -37,20 +38,14 @@
             },
             dataType: "json",
             success: function(data) {
-                $("#asds").removeAttr("class");
-                console.log(data.user_send_request);
-                if (data.user_send_request == "Approved") {
-                    $("#asds").addClass("btn btn-warning mr-1 mb-1 asdd");
-                } else {
-                    $("#asds").addClass("btn btn-success mr-1 mb-1 asdd");
-                }
-                $("#asds").html(data.status);
+                
                 $('#pointlistdatatable-table').DataTable().ajax.reload();
             }
         })
     });
     // ---------------------------------------status-----------------------------
     $(document).on('click', '.status', function() {
+        alert('status');
         var id = $(this).data('id');
         var number = $(this).attr('id', 'asd');
         $.ajax({

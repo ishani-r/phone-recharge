@@ -30,14 +30,7 @@ class PointListDatatable extends DataTable
                 return $result;
             })
 
-            ->editColumn('user_send_request', function ($data) {
-                if ($data['user_send_request'] == 'Pending') {
-                    return '<button type="button" data-id="' . $data->id . '" class="btn btn-warning mr-1 mb-1 asdd"> Pending </button>';
-                } else {
-                    return '<button type="button" data-id="' . $data->id . '" class="btn btn-success mr-1 mb-1 asdd"> Approved </button>';
-                }
-            })
-
+            
             ->editColumn('status', function ($data) {
                 if ($data['status'] == 'Active') {
                     return '<button type="button" data-id="' . $data->id . '" class="badge rounded-pill bg-success status"> Active </button>';
@@ -46,7 +39,16 @@ class PointListDatatable extends DataTable
                 }
             })
 
-            ->rawColumns(['action','user_send_request', 'status'])
+            ->editColumn('user_send_request', function ($data) {
+                if ($data['user_send_request'] == "Pending") {
+                    // dd(1);
+                    return '<button type="button" data-id="' . $data->id . '" class="btn btn-warning mr-1 mb-1 asdd"> Pending </button>';
+                } else {
+                    return '<button type="button" data-id="' . $data->id . '" class="btn btn-success mr-1 mb-1 asdd"> Approved </button>';
+                }
+            })
+
+            ->rawColumns(['action', 'status','user_send_request'])
             ->addIndexColumn();
     }
 
