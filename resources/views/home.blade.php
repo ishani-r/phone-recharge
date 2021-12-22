@@ -19,7 +19,7 @@
             @endif
             <div class="card-header">{{ __('You can create post Here') }}
                <div class="text-right">
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter4">
+                  <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter4">
                      Recharge History
                   </button>
                </div>
@@ -85,13 +85,13 @@
                         </span>
                         @enderror
                      </div>
-                     <button type="submit" class="btn btn-primary">Send Request</button>
+                     <button type="submit" class="btn btn-success">Send Request</button>
                   </form>
                   <!-- <a href="{{ route('send_request')}}" type="submit" class="btn btn-primary">
                      Send Request
                   </a> -->
 
-                  <h5>If you get 30 or more than 30 points,
+                  <h5>If you get more than 30 points,
                      </br> you will be able to send recharge Request</h5>
                   <?php
                   $total_point = App\Models\Point::where('user_id', Illuminate\Support\Facades\Auth::Guard('web')->user()->id)->get();
