@@ -12,7 +12,7 @@
             <h4 class="card-title">{{ trans('Users Table')}}</h4>
             <p class="card-category"> {{ trans('Here is a data for Users')}}</p>
           </div>
-          <form action="{{ route('admin.import') }}" method="POST" enctype="multipart/form-data">
+          <form action="" method="POST" enctype="multipart/form-data">
             @csrf
             <label class="bmd-label-floating">{{ trans('Select File')}}</label>
             <input type="file" name="file" class="form-control">
