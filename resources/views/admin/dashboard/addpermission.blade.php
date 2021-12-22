@@ -27,7 +27,7 @@
                            {{Form::text('module_name','',['class'=>'form-control module_name'])}}
                            @error('module_name')
                            <span role="alert">
-                              <strong style="color:red;">{{ $message }}</strong>
+                              <strong style="color:red;">{{ tranc('$message') }}</strong>
                            </span>
                            @enderror
                            <p id="duplicat_name"></p>
@@ -48,7 +48,7 @@
                         </div>
                      </div>
                   </div>
-                  {{Form::submit( trans('Add'), ['class'=>'btn btn-primary pull-right'])}}
+                  {{Form::submit( trans('Add'), ['class'=>'btn btn-primary pull-right asd'])}}
                   {!!Form::close()!!}
                   <div class="clearfix"></div>
                   <!-- </form> -->

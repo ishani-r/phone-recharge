@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\LoginController;
-use App\Http\Controllers\API\UserController;
+// use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\UserDetailsController;
 use App\Http\Controllers\API\LikeController;
 use App\Http\Controllers\API\PremiumController;
@@ -31,10 +31,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // -------------------------- User --------------------------
 Route::post('login',                [LoginController::class, 'login']);
-Route::post('insertuser',           [UserController::class, 'store']);
-Route::get('showuser/{id?}',        [UserController::class, 'show']);
-Route::put('updateuser/{id}',       [UserController::class, 'update']);
-Route::delete('deleteuser/{id}',    [UserController::class, 'destroy']);
+// Route::post('insertuser',           [UserController::class, 'store']);
+// Route::get('showuser/{id?}',        [UserController::class, 'show']);
+// Route::put('updateuser/{id}',       [UserController::class, 'update']);
+// Route::delete('deleteuser/{id}',    [UserController::class, 'destroy']);
 
 // ---------------------------------------- Mail ---------------------------------------
 Route::post('sendmail', [ForgotPasswordController::class, 'sendMail']);
@@ -42,7 +42,7 @@ Route::post('otpsend', [ForgotPasswordController::class, 'otpSend']);
 
 Route::post('createToken', [AuthApiController::class, 'createToken']);
 Route::group(['middleware' => 'AuthenticateApi'], function () {
-    Route::post('friend-details', 'Api\UserController@friendDetails');
+    // Route::post('friend-details', 'Api\UserController@friendDetails');
 });
 
 Route::group(['middleware' => 'auth:api'], function () {

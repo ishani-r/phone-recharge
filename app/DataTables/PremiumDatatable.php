@@ -89,15 +89,15 @@ class PremiumDatatable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id')->data('DT_RowIndex'),
-            Column::make('name'),
-            Column::make('six_months'),
-            Column::make('three_months'),
-            Column::make('one_months'),
-            Column::make('try_days'),
-            Column::make('save'),
-            Column::make('status'),
-            Column::computed('action')
+            Column::make('id')->data('DT_RowIndex')->title(trans('id')),
+            Column::make('name')->title(trans('name')),
+            Column::make('six_months')->title(trans('six_months')),
+            Column::make('three_months')->title(trans('three_months')),
+            Column::make('one_months')->title(trans('one_months')),
+            Column::make('try_days')->title(trans('try_days')),
+            Column::make('save')->title(trans('save')),
+            Column::make('status')->title(trans('status')),
+            Column::computed('action')->title(trans('action'))
                 ->exportable(false)
                 ->printable(false)
                 ->width(60)

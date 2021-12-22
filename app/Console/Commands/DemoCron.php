@@ -3,6 +3,9 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Models\User;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AutoSendMail;
 
 class DemoCron extends Command
 {
@@ -37,7 +40,16 @@ class DemoCron extends Command
      */
     public function handle()
     {
-        \Log::info("Cron is working fine!");
+        $User = User::all();
+        // \Log::info($User);
+        foreach ($User as $all) {
+
+            Mail::to($all['email'])->send(new AutoSendMail());
+            // Mail::raw("This is automatically generated mail", function ($message) use ($all) {
+            //     $message->from('ranpariyaishani21@gmail.com');
+            //     $message->to($all->email)->subject('Cron Job');
+            // });
+        }
         // return Command::SUCCESS;
     }
 }

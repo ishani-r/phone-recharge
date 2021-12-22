@@ -33,11 +33,11 @@ class AdminRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Please Enter Your Name.',
-            'email.required' => 'Please Enter Your Email Address.',
-            'password.required' => 'Please Enter Your Password.',
-            'image.required' => 'Please Select Your Profile Picture.',
-            'password.regex' => 'Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.'
+            'name.required' => trans('Please Enter Your Name.'),
+            'email.required' => trans('Please Enter Your Email Address.'),
+            'password.required' => trans('Please Enter Your Password.'),
+            'image.required' => trans('Please Select Your Profile Picture.'),
+            'password.regex' => trans('Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.')
         ];
     }
 }

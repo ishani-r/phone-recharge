@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNotificationsTable extends Migration
+class AddStatusInRechargesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateNotificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('notifications', function (Blueprint $table) {
-            $table->id();
-            $table->string('user_id');
-            $table->string('message');
-            $table->timestamps();
+        Schema::table('recharges', function (Blueprint $table) {
+            $table->string('status')->after('total_point');
         });
     }
 
@@ -28,6 +25,8 @@ class CreateNotificationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('notifications');
+        Schema::table('recharges', function (Blueprint $table) {
+            $table->dropColumn(['status']);
+        });
     }
 }
