@@ -40,9 +40,10 @@ class PointListDatatable extends DataTable
             })
 
             ->editColumn('user_send_request', function ($data) {
-                if ($data['user_send_request'] == "Pending") {
+                // dd($data['user_send_request']);
+                if ($data['user_send_request'] == "Panding") {
                     // dd(1);
-                    return '<button type="button" data-id="' . $data->id . '" class="btn btn-warning mr-1 mb-1 asdd"> Pending </button>';
+                    return '<button type="button" data-id="' . $data->id . '" class="btn btn-warning mr-1 mb-1 asdd"> Panding </button>';
                 } else {
                     return '<button type="button" data-id="' . $data->id . '" class="btn btn-success mr-1 mb-1 asdd"> Approved </button>';
                 }
